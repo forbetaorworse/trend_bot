@@ -1,6 +1,9 @@
 # Hubot
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 68a07274be305332b3946b552ed667f7e4d27b57
 This is a version of GitHub's Campfire bot, hubot. He's pretty cool.
 
 **You'll probably never have to hack on this repo directly.**
