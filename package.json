@@ -22,6 +22,10 @@
     "connect": "2.3.4",
     "connect_router": "1.8.6"
   },
+  "engines": {
+    "node": "0.6.x",
+    "npm": "1.1.x"
+  },
 
   "main": "./index",
 
