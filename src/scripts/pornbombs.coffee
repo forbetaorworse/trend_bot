@@ -9,12 +9,13 @@
 # Author:
 #   sonicboom
 
+# adopted to T R E N D S P A C E
+# By ERIC WESTBROOK MOTHERFUCKER - ERICWESTBROOK.NET
 
 # Dick bomb
 module.exports = (robot) ->
 	robot.respond /dick bomb( (\d+))?/i, (msg) ->
 		if msg.message.user.room?
-			if msg.message.user.room is 291291 #limits use to the basement
 			    count = msg.match[2] || 5
 			    if count > 20 then count = 20
 				msg.http("http://imgur.com/r/penis.json")
@@ -29,8 +30,7 @@ module.exports = (robot) ->
 						
 	robot.respond /tit bomb( (\d+))?/i, (msg) ->
 		if msg.message.user.room?
-			if msg.message.user.room is 291291 #limits use to the basement
-			    count = msg.match[2] || 5
+			count = msg.match[2] || 5
 			    if count > 20 then count = 20
 				msg.http("http://imgur.com/r/boobies.json")
 					.get() (err, res, body) ->
@@ -44,7 +44,6 @@ module.exports = (robot) ->
 						
 	robot.respond /porn bomb( (\d+))?/i, (msg) ->
 		if msg.message.user.room?
-			if msg.message.user.room is 291291 #limits use to the basement
 			    count = msg.match[2] || 5
 			    if count > 20 then count = 20
 				msg.http("http://imgur.com/r/porn.json")
