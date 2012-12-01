@@ -15,7 +15,6 @@
 # Dick bomb
 module.exports = (robot) ->
 	robot.respond /dick bomb( (\d+))?/i, (msg) ->
-		if msg.message.user.room?
 			    count = msg.match[2] || 5
 			    if count > 20 then count = 20
 				msg.http("http://imgur.com/r/penis.json")
@@ -29,7 +28,6 @@ module.exports = (robot) ->
 						msg.send image for image in imageArray
 						
 	robot.respond /tit bomb( (\d+))?/i, (msg) ->
-		if msg.message.user.room?
 			count = msg.match[2] || 5
 			    if count > 20 then count = 20
 				msg.http("http://imgur.com/r/boobies.json")
@@ -43,7 +41,6 @@ module.exports = (robot) ->
 						msg.send image for image in imageArray
 						
 	robot.respond /porn bomb( (\d+))?/i, (msg) ->
-		if msg.message.user.room?
 			    count = msg.match[2] || 5
 			    if count > 20 then count = 20
 				msg.http("http://imgur.com/r/porn.json")
