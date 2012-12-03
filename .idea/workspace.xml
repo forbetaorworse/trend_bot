@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae6af91e-ce3e-4aa1-a6a0-3761f5fc6c70" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scripts/pornbombs.coffee" afterPath="$PROJECT_DIR$/src/scripts/pornbombs.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="trend_bot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,7 +24,7 @@
       <file leaf-file-name="pornbombs.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/scripts/pornbombs.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="28" selection-start="1251" selection-end="1251" vertical-scroll-proportion="0.6182033">
+            <state line="14" column="7" selection-start="206" selection-end="206" vertical-scroll-proportion="0.3144208">
               <folding />
             </state>
           </provider>
@@ -145,13 +145,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="27" y="47" width="1585" height="970" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24951267" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18648472" sideWeight="0.49599084" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18648472" sideWeight="0.49599084" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -221,7 +221,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/scripts/pornbombs.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="28" selection-start="1251" selection-end="1251" vertical-scroll-proportion="0.6182033">
+        <state line="14" column="7" selection-start="206" selection-end="206" vertical-scroll-proportion="0.3144208">
           <folding />
         </state>
       </provider>
