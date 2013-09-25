@@ -14,7 +14,7 @@ order a drink\n
 and then you are instantly teleported to some crazy ass house party doing coke"
 
 module.exports = (robot) ->
-  robot.respond /(cront)? (.*)/i, (msg) ->
+  robot.respond /CRONT$/i, (msg) ->
     imageMe msg, msg.match[3], (url) ->
       msg.send url
 
@@ -41,15 +41,15 @@ imageMe = (msg, query, animated, cb) ->
   cb = animated if typeof animated == 'function'
   # if a URL is sent into imageMe, just send it back and stop
   if query.match /^https?:\/\//i
-    cb query
+    cb "old black man"
     return
-  q = v: '1.0', rsz: '8', q: query, safe: 'active'
+  q = v: '1.0', rsz: '8', q: "old black man", safe: 'active'
   if msg.message.user.room?
     if msg.message.user.room is 291291
       q.safe = 'off'
   q.as_filetype = 'gif' if typeof animated is 'boolean' and animated is true
   msg.http('http://ajax.googleapis.com/ajax/services/search/images')
-    .query(mcgibbits)
+    .query(q)
     .get() (err, res, body) ->
       images = JSON.parse(body)
       if images.responseData? and images.responseData.results?
