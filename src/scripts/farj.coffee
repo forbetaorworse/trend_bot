@@ -15,13 +15,13 @@ and then you are instantly teleported to some crazy ass house party doing coke"
 
 module.exports = (robot) ->
   robot.respond /CRONT$/i, (msg) ->
-    imageMe msg, msg.match[3], (url) ->
+    grimageMe msg, "old black man", (url) ->
       msg.send url
 
 
 
 
-imageMe = (msg, query, animated, cb) ->
+grimageMe = (msg, query, animated, cb) ->
   # if query is !, find the previous message and grab its contents and rerun the query
   if query is "!"
     if msg.robot.adapter.bot.get?
@@ -32,18 +32,18 @@ imageMe = (msg, query, animated, cb) ->
             if recent.messages[i].id is msg.message.user.msg_id
               while recent.messages[i-1].type isnt "TextMessage"
                 i--
-              imageMe msg, recent.messages[i-1].body, animated, cb
+              grimageMe msg, recent.messages[i-1].body, animated, cb
               return
         else msg.send "I can't find a previous message."
     else msg.send "I can't find a previous message."
     return    
 
   cb = animated if typeof animated == 'function'
-  # if a URL is sent into imageMe, just send it back and stop
+  # if a URL is sent into grimageMe, just send it back and stop
   if query.match /^https?:\/\//i
     cb "old black man"
     return
-  q = v: '1.0', rsz: '8', q: "old black man", safe: 'active'
+  q = v: '1.0', rsz: '8', q: query, safe: 'active'
   if msg.message.user.room?
     if msg.message.user.room is 291291
       q.safe = 'off'
