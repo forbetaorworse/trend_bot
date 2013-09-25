@@ -13,12 +13,14 @@ Walk into any bar\n
 order a drink\n
 and then you are instantly teleported to some crazy ass house party doing coke"
 
-module.exports = (robot) ->
+
   robot.respond /CRONT$/i, (msg) ->
     grimageMe msg, "old black man", (url) ->
       msg.send url
 
-
+  robot.respond /DIE$/i, (msg) ->
+    msg.send "Goodbye, cruel world."
+    process.exit 0
 
 
 grimageMe = (msg, query, animated, cb) ->
