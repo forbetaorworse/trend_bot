@@ -14,7 +14,7 @@ order a drink\n
 and then you are instantly teleported to some crazy ass house party doing coke"
 
 
-  robot.respond /CRONT$/i, (msg) ->
+  robot.respond /ALDEN$/i, (msg) ->
     grimageMe msg, "old black man", (url) ->
       msg.send url
 
