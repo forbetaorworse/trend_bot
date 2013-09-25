@@ -1,0 +1,14 @@
+HOW TO PUSH CHANGES TO HUBOT/TRENDBOT
+
+1. Edit the file: subl ping.coffee
+
+2. Do the following commands in this order:
+
+(Make sure you're in the /trend_bot/ parent dir)
+
+git init
+git add .
+git commit -a -m "updated ping.coffee, added some shit, etc"
+git push origin master
+git push heroku master
+heroku restart
