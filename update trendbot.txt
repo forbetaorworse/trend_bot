@@ -4,10 +4,12 @@ HOW TO PUSH CHANGES TO HUBOT/TRENDBOT
 
 2. Do the following commands in this order:
 
-(Make sure you're in the /trend_bot/ parent dir)
+(Make sure you're in the /trend_bot/ parent dir, in
+this case ~/Documents/trend_bot)
 
 git init
 git add .
+git status
 git commit -a -m "updated ping.coffee, added some shit, etc"
 git push origin master
 git push heroku master
