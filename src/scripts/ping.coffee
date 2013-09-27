@@ -15,11 +15,11 @@ module.exports = (robot) ->
   robot.respond /SCRIMB$/i, (msg) ->
     msg.send "Hitler"
 
-  robot.respond /yindy/i, (msg) ->
-    yonny = 3
-    msg.send "Great work, dude! The yindy command has been run ${yonny} times."
+#  robot.respond /yindy/i, (msg) ->
+#    yonny = 3
+#    msg.send "Great work, dude! The yindy command has been run ${yonny} times."
   
-robot.respond /bro/i, (msg) ->
+  robot.respond /bro/i, (msg) ->
     msg.send "Bro"
 
 
