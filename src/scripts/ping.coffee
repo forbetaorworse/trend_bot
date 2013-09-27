@@ -15,9 +15,13 @@ module.exports = (robot) ->
   robot.respond /SCRIMB$/i, (msg) ->
     msg.send "Hitler"
 
-  robot.respond /YINDY$/i, (msg) ->
-    msg.send "Great work, dude! The yindy command has been run yinternet times."
+  robot.respond /yindy/i, (msg) ->
+    yonny = 3
+    msg.send "Great work, dude! The yindy command has been run ${yonny} times."
   
+robot.respond /bro/i, (msg) ->
+    msg.send "Bro"
+
 
   robot.respond /ECHO (.*)$/i, (msg) ->
     msg.send msg.match[1]
