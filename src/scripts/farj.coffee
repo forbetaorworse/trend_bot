@@ -4,13 +4,14 @@
 # Commands:
 #   hubot gron - Reply with patented GRON command
 #   hubot cront - return pic of mcgibbits
+# hubot yindy = does some shit
 
 yinternet = 1
 
 module.exports = (robot) ->
-  yinternet = yinternet + 1
   robot.respond /YINDY$/i, (msg) ->
-    msg.send "Great work, dude! The /yindy command has been run #{yinternet} times."
+    yinternet = yinternet + 1
+    msg.send "Great work, dude! The /yindy command has been run #{yinternet} times." + yinternet
 
 module.exports = (robot) ->
   robot.respond /GRON$/i, (msg) ->
