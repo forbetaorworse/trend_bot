@@ -16,11 +16,7 @@ module.exports = (robot) ->
     msg.send "Hitler"
 
   robot.respond /YINDY$/i, (msg) ->
-    if yinternet < 10
-    	yinternet = 1
-    else
-    	yinternet++
-    msg.send "Great work, dude! The /yindy command has been run yinternet times."
+    msg.send "Great work, dude! The yindy command has been run yinternet times."
   
 
   robot.respond /ECHO (.*)$/i, (msg) ->
