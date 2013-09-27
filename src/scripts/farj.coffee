@@ -14,8 +14,6 @@ robot.respond /BRO$/i, (msg) ->
     msg.send "Bro"
 
 robot.respond /YINDY$/i, (msg) ->
-    # if yinternet < 1 then yinternet = 1
-    # yinternet = yinternet + 1
     msg.send "Great work, dude! The /yindy command has been run yinternet times."
 
   robot.respond /ALDEN$/i, (msg) ->
