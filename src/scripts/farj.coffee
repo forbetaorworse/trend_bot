@@ -9,11 +9,6 @@
 yinternet = 1
 
 module.exports = (robot) ->
-  robot.respond /YINDY$/i, (msg) ->
-    yinternet = yinternet + 1
-    msg.send "Great work, dude! The /yindy command has been run #{yinternet} times." + yinternet
-
-module.exports = (robot) ->
   robot.respond /GRON$/i, (msg) ->
     msg.send "Thank you for running the GRON command! Copyright (C) 2013 Chris Hopkins Software. All Rights Reserved. Gifbert dude\n
 getting laid in LA is awesome\n
@@ -21,6 +16,11 @@ Walk into any bar\n
 order a drink\n
 and then you are instantly teleported to some crazy ass house party doing coke"
 
+
+
+robot.respond /YINDY$/i, (msg) ->
+    yinternet++
+    msg.send "Great work, dude! The /yindy command has been run #{yinternet} times."
 
 
 
