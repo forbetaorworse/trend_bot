@@ -13,6 +13,6 @@ module.exports = (robot) ->
 		msg.send "Warning! Current level of fagocity in TRENDSPACE is now #{fagocity}."
 
 
-		robot.respond /dedildonics$/i, (msg) ->
-			fagocity-=1
-			msg.send "Notice. Current level of fagocity in TRENDSPACE has now stabalized to #{fagocity}."
+	robot.respond /dedildonics$/i, (msg) ->
+		fagocity-=1
+		msg.send "Notice. Current level of fagocity in TRENDSPACE has now stabalized to #{fagocity}."
