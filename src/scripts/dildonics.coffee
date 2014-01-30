@@ -8,7 +8,7 @@ fagocity = 0
 
 module.exports = (robot) ->
   robot.respond /dildonics$/i, (msg) ->
-    fagocity ++
+    fagocity++
     msg.send "Warning! Current level of fagocity in TRENDSPACE is now #{fagocity}."
 
   robot.respond /dedildonics$/i (msg) ->
