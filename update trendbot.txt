@@ -1,3 +1,29 @@
+HOW TO DEVELOP LOCALLY FOR JIMBOT / TRENDBOT
+
+1. cd to ~/Downloads/redis-2.8.4
+2. Run src/redis-server
+3. To interact with Redis using the built-in client, run src/redis-cli from the same folder
+
+
+Example of client usage:
+
+$ src/redis-cli
+redis> set foo bar
+OK
+redis> get foo
+"bar"
+
+
+
+4. cd to ~/Work/misc/hubot
+5. run bin/hubot
+6. type hubot ping -- boom, its running
+
+check out korg.coffee for current status of trend-rpg
+
+
+
+
 HOW TO PUSH CHANGES TO HUBOT/TRENDBOT
 
 1. Edit the file: subl ping.coffee
