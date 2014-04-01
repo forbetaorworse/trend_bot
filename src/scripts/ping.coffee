@@ -10,7 +10,7 @@
 
 module.exports = (robot) ->
   robot.respond /PING$/i, (msg) ->
-    msg.send "PONGSPACE, you guys!!! Ha Ha drugs meaning"
+    msg.send "PONGSPACE, you guys!!! Ha Ha drugs meaning (2014 I-H8-TRENDSPACE Edition)"
 
   robot.respond /SCRIMB$/i, (msg) ->
     msg.send "Hitler"

@@ -5,7 +5,7 @@
 #   hubot dildonics - Raises current level of fagocity
 #   hubot dedildonics - Lowers current level of fagocity
 
-fagocity = 0
+fagocity = 133780085
 
 module.exports = (robot) ->
 	robot.respond /dildonics$/i, (msg) ->
