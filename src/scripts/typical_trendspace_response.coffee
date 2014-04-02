@@ -14,7 +14,7 @@ reaction = [
 	"Im gay"
 	"Your gay"
 	"I'm afraid that I'm going to lose my job."
-	"lol ya thaz dope. ah ah. hit tha movug mah ah ah"
+	"Fuck Meixel"
 	"I am afraid I'm going to lose my job."
 	"Lets do some coke"
 	"Lets do some weed"
