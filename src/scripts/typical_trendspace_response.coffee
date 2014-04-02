@@ -36,6 +36,10 @@ module.exports = (robot) ->
 		#console.log reaction[Math.floor(Math.random() * reaction.length)]
 		msg.send reaction[Math.floor(Math.random() * reaction.length)]
 		
+module.exports = (robot) ->
+	robot.respond /ttr$/i, (msg) ->
+		#console.log reaction[Math.floor(Math.random() * reaction.length)]
+		msg.send reaction[Math.floor(Math.random() * reaction.length)]
 
 
 		#msg.send "Warning! Current level of fagocity in TRENDSPACE is now #{fagocity}."
