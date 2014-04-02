@@ -16,11 +16,19 @@ reaction = [
 	"I'm afraid that I'm going to lose my job."
 	"lol ya thaz dope. ah ah. hit tha movug mah ah ah"
 	"I am afraid I'm going to lose my job."
+	"Lets do some coke"
+	"Lets do some weed"
+	"Lets do some beer"
+	"Lets do some MDA"
+	"Lets do some foxy"
+	"Lets do some acid"
+	"Lets do some shrooms"
+	"Lets do some whip-its"
+	"Lets do some champagne"
 	"Time for a :shit:"
-	"Time for a :shit: :shit: :shit: :shit: :shit: :shit: :shit: :shit:"
 	"Life is meaningless"
-	"No one likes you"
-	"Please leave this chat room"
+	"Where is Miles"
+	"Yo can I be real with you guys for a second"
 ]
 
 module.exports = (robot) ->
