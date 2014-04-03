@@ -9,10 +9,6 @@
 # Author:
 #   Chris & Eric, TRENDSPACE INTERNET COMPANY INC
 
-http = require('http')
-OAuth = require('oauth').OAuth
-url = require('url')
-
 # Bro bomb
 module.exports = (robot) ->
   robot.respond /bro bomb( (\d+))?/i, (msg) ->
