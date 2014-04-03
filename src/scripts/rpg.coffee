@@ -8,5 +8,7 @@
 
 module.exports = (robot) ->
 	robot.respond /rpg$/i, (msg) ->
-		msg.send "RPG script run B"
-		msg.send "#{msg.message.user.name}"
+
+		rpg_name = "#{msg.message.user.name}"
+		msg.send "--== Welcome to the Adventure, #{rpg_name} ==--"
+		#msg.send "#{msg.message.user.name}"
