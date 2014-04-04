@@ -12,9 +12,9 @@ rpg_hp = 377
 module.exports = (robot) ->
 	robot.respond /rpg$/i, (msg) ->
 		rpg_name = "#{msg.message.user.name}"
-		msg.send "--== Welcome to the Adventure, #{rpg_name} ==--"," ","Your HP (rpg_hp): #{rpg_hp}","Your MP: 7"," ","globvar: #{globvar}","Location: Mossy Cavern"
+		msg.send "--== Welcome to the Adventure, #{rpg_name} ==--"," ","Your HP: #{rpg_hp}","Your MP: 7"," ","Location: Mossy Cavern"
 		msg.send " "
-		msg.send "Your HP: #{rpg_hp}"
+		#msg.send "Your HP: #{rpg_hp}"
 
 	robot.respond /rpg2$/i, (msg) ->
 		rpg_hp -= 2
