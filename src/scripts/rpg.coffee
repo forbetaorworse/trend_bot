@@ -25,8 +25,6 @@ module.exports = (robot) ->
 		rpg_name = "#{msg.message.user.name}"
 		if rpg_name = "Shell"
 			msg.send "You must be devin' loco"
-		else if rpg_name = "Richard Suit"
-			msg.send "Dick Suit! Good to have you with us I guess"
 		else
 			msg.send "I don't know who yer face belongs to, stranger."
 		msg.send "--==(0)==--"
