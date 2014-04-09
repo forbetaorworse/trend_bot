@@ -23,8 +23,17 @@ module.exports = (robot) ->
 
 	robot.respond /rpg3$/i, (msg) ->
 		rpg_name = "#{msg.message.user.name}"
-		if rpg_name = "Shell"
-			msg.send "You must be devin' loco"
+		if rpg_name is "Shell"
+			msg.send "Your loco and rpg_name is #{rpg_name}
 		else
 			msg.send "I don't know who yer face belongs to, stranger."
 		msg.send "--==(0)==--"
+
+
+
+#  if users.length is 1
+#      users[0]
+#    else if users.length > 1
+#      users
+#    else
+#      false
