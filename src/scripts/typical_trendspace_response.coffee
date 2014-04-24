@@ -13,7 +13,7 @@ fagocity = 133780085
 reaction = [
 	"Im gay"
 	"Your gay"
-	"I'm afraid that I'm going to lose my job."
+	"http://critical-hit.org/img/kooki%20kookta%20ii.gif"
 	"Fuck Meixel"
 	"I am afraid I'm going to lose my job."
 	"Lets do some coke"
@@ -26,9 +26,10 @@ reaction = [
 	"Lets do some whip-its"
 	"Lets do some champagne"
 	"Time for a :shit:"
-	"Life is meaningless"
+	"Life is "
 	"Where is Miles"
 	"Yo can I be real with you guys for a second"
+	"Let's smoke legal illegal weeds in 7 minutes"
 ]
 
 module.exports = (robot) ->
