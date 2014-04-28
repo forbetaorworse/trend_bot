@@ -3,6 +3,7 @@
 #
 # Commands:
 #   hubot actual bomb N - get N explosion pics
+#   hubot advice bomb N - get N advice animals pics
 #   hubot brony bomb N - get N brony pics
 #   hubot cringe bomb N - get N cringe pics
 #   hubot dogecoin bomb N - get N dogecoin pics
@@ -23,6 +24,20 @@ module.exports = (robot) ->
     count = msg.match[2] || 5
     if count > 20 then count = 20
     msg.http("http://imgur.com/r/bombs.json")
+      .get() (err, res, body) ->
+        images = JSON.parse(body)
+        images = images.data
+        imageArray = new Array()
+        while (count -= 1)+1
+          image = msg.random images
+          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
+        msg.send image for image in imageArray
+
+  # Advice bomb
+  robot.respond /advice bomb( (\d+))?/i, (msg) ->
+    count = msg.match[2] || 5
+    if count > 20 then count = 20
+    msg.http("http://imgur.com/r/adviceanimals.json")
       .get() (err, res, body) ->
         images = JSON.parse(body)
         images = images.data
