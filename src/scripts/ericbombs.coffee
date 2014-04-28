@@ -6,15 +6,14 @@
 #   hubot dogecoin bomb N - get N dogecoin pics
 #   hubot god bomb N - get N onetruegod pics
 #   hubot idiot bomb N - get N idiotsfightingthings pics
+#   hubot woah bomb N - get N woahdude pics
 
 #
 # Author:
 #   Eric Westbrook
 
-
-
-# Cringe bomb
 module.exports = (robot) ->
+  # Cringe bomb
   robot.respond /cringe bomb( (\d+))?/i, (msg) ->
     count = msg.match[2] || 5
     if count > 20 then count = 20
@@ -28,8 +27,7 @@ module.exports = (robot) ->
           imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
         msg.send image for image in imageArray
 
-# Dogecoin bomb
-module.exports = (robot) ->
+  # Dogecoin bomb
   robot.respond /dogecoin bomb( (\d+))?/i, (msg) ->
     count = msg.match[2] || 5
     if count > 20 then count = 20
@@ -44,8 +42,7 @@ module.exports = (robot) ->
         msg.send image for image in imageArray
         msg.send "Fuck You"
 
-# God bomb
-module.exports = (robot) ->
+  # God bomb
   robot.respond /god bomb( (\d+))?/i, (msg) ->
     count = msg.match[2] || 5
     if count > 20 then count = 20
@@ -59,12 +56,25 @@ module.exports = (robot) ->
           imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
         msg.send image for image in imageArray
 
-# Idiot bomb
-module.exports = (robot) ->
+  # Idiot bomb
   robot.respond /idiot bomb( (\d+))?/i, (msg) ->
     count = msg.match[2] || 5
     if count > 20 then count = 20
     msg.http("http://imgur.com/r/idiotsfightingthings.json")
+      .get() (err, res, body) ->
+        images = JSON.parse(body)
+        images = images.data
+        imageArray = new Array()
+        while (count -= 1)+1
+          image = msg.random images
+          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
+        msg.send image for image in imageArray
+
+  # Woah bomb
+  robot.respond /woah bomb( (\d+))?/i, (msg) ->
+    count = msg.match[2] || 5
+    if count > 20 then count = 20
+    msg.http("http://imgur.com/r/woahdude.json")
       .get() (err, res, body) ->
         images = JSON.parse(body)
         images = images.data
