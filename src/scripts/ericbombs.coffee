@@ -42,6 +42,7 @@ module.exports = (robot) ->
           image = msg.random images
           imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
         msg.send image for image in imageArray
+        msg.send "Fuck You"
 
 # God bomb
 module.exports = (robot) ->
