@@ -4,7 +4,7 @@
 # Commands:
 #   hubot cringe bomb N - get N cringe pics
 #   hubot idiot bomb N - get N idiotsfightingthings pics
-#   hubot honky bomb N - get N whitepeoplegifs pics
+#   hubot god bomb N - get N onetruegod pics
 
 #
 # Author:
@@ -44,10 +44,10 @@ module.exports = (robot) ->
 
 # Honky bomb
 module.exports = (robot) ->
-  robot.respond /honky bomb( (\d+))?/i, (msg) ->
+  robot.respond /god bomb( (\d+))?/i, (msg) ->
     count = msg.match[2] || 5
     if count > 20 then count = 20
-    msg.http("http://imgur.com/r/whitepeoplegifs.json")
+    msg.http("http://imgur.com/r/onetruegod.json")
       .get() (err, res, body) ->
         images = JSON.parse(body)
         images = images.data
