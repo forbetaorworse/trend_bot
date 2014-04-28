@@ -19,7 +19,7 @@ module.exports = (robot) ->
   robot.respond /actual bomb( (\d+))?/i, (msg) ->
     count = msg.match[2] || 5
     if count > 20 then count = 20
-    msg.http("http://imgur.com/r/explosions.json")
+    msg.http("http://imgur.com/r/bombs.json")
       .get() (err, res, body) ->
         images = JSON.parse(body)
         images = images.data
