@@ -32,3 +32,7 @@ module.exports = (robot) ->
       response += "\n"
 
     msg.send response
+
+  robot.respond /avatar fag(got)?s$/i, (msg) ->
+    for own key, user of robot.brain.data.users
+      msg.send user.avatar_url
