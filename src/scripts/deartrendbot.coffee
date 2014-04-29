@@ -41,3 +41,4 @@ module.exports = (robot) ->
     drug = drugs[Math.floor(Math.random() * reaction.length)]
     response = responses[Math.floor(Math.random() * reaction.length)].replace /123/ drug
     msg.send response
+    
