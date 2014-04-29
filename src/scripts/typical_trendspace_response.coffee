@@ -6,9 +6,6 @@
 # Commands:
 #   hubot typical_trendspace_response - Returns a typical trendspace response / reaction.
 
-# useless variable
-fagocity = 133780085
-
 # reaction array
 reaction = [
 	"Im gay"
@@ -33,14 +30,7 @@ reaction = [
 ]
 
 module.exports = (robot) ->
-	robot.respond /typical_trendspace_response$/i, (msg) ->
+	robot.respond /(typical_trendspace_response|ttr)$/i, (msg) ->
 		#console.log reaction[Math.floor(Math.random() * reaction.length)]
 		msg.send reaction[Math.floor(Math.random() * reaction.length)]
 		
-module.exports = (robot) ->
-	robot.respond /ttr$/i, (msg) ->
-		#console.log reaction[Math.floor(Math.random() * reaction.length)]
-		msg.send reaction[Math.floor(Math.random() * reaction.length)]
-
-
-		#msg.send "Warning! Current level of fagocity in TRENDSPACE is now #{fagocity}."
