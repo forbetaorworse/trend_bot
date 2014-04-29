@@ -179,7 +179,7 @@ module.exports = (robot) ->
     count = msg.match[3] || 5
     subreddit = msg.match[1]
     if count > 20 then count = 20
-    fuckyou =/(i?)gore/i.test subreddit
+    fuckyou =/(i?)(gore|spacedicks)/i.test subreddit
     if fuckyou
       subreddit = "aww"
       msg.send "Fuck you, I'm not doing it..."
