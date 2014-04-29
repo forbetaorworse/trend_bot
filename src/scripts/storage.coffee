@@ -24,7 +24,7 @@ module.exports = (robot) ->
     msg.send response
 
   robot.respond /(show )?fag(got)?s$/i, (msg) ->
-    response = ""
+    response = "Look at these little faggots: \n"
 
     for own key, user of robot.brain.data.users
       response += "#{user.id} #{user.name}"

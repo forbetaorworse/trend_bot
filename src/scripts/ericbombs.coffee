@@ -177,7 +177,12 @@ module.exports = (robot) ->
   # Custom subreddit bomb
   robot.respond /custom ([\w.-]*) bomb( (\d+))?/i, (msg) ->
     count = msg.match[3] || 5
+    subreddit = msg.match[1]
     if count > 20 then count = 20
+    fuckyou =/(i?)gore/i.test subreddit
+    if fuckyou
+      subreddit = "aww"
+      msg.send "Fuck you, I'm not doing it..."
     msg.http("http://imgur.com/r/#{msg.match[1]}.json")
       .get() (err, res, body) ->
         images = JSON.parse(body)
