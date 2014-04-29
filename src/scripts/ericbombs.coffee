@@ -11,7 +11,9 @@
 #   hubot god bomb N - get N onetruegod pics
 #   hubot idiot bomb N - get N idiotsfightingthings pics
 #   hubot nature bomb N - get N animalsbeingjerks pics
+#   hubot nope bomb N - get N nope pics
 #   hubot porn bomb N - get N porn pics
+#   hubot reaction bomb N - get N chemicalreactiongifs pics
 #   hubot tit bomb N - get N tit pics
 #   hubot trendspace bomb N - get N trendspace pics
 #   hubot woah bomb N - get N woahdude pics
@@ -60,9 +62,17 @@ module.exports = (robot) ->
   robot.respond /nature bomb( (\d+))?/i, (msg) ->
     bombMe("animalsbeingjerks", msg)
 
+  # Nope bomb
+  robot.respond /nope bomb( (\d+))?/i, (msg) ->
+    bombMe("nope", msg)
+
   # Porn bomb
   robot.respond /porn bomb( (\d+))?/i, (msg) ->
     bombMe("porn", msg)
+
+  # Reaction bomb
+  robot.respond /reaction bomb( (\d+))?/i, (msg) ->
+    bombMe("chemicalreactiongifs", msg)
 
   # Tit bomb
   robot.respond /tit bomb( (\d+))?/i, (msg) ->
