@@ -10,6 +10,7 @@
 #   hubot god bomb N - get N onetruegod pics
 #   hubot idiot bomb N - get N idiotsfightingthings pics
 #   hubot nature bomb N - get N animalsbeingjerks pics
+#   hubot trendspace bomb N - get N trendspace pics
 #   hubot woah bomb N - get N woahdude pics
 #   hubot yummy bomb N - get N shittyfoodporn pics
 #   hubot custom SUBREDDIT bomb N - get N pics from any subreddit you want
@@ -123,6 +124,20 @@ module.exports = (robot) ->
     count = msg.match[2] || 5
     if count > 20 then count = 20
     msg.http("http://imgur.com/r/animalsbeingjerks.json")
+      .get() (err, res, body) ->
+        images = JSON.parse(body)
+        images = images.data
+        imageArray = new Array()
+        while (count -= 1)+1
+          image = msg.random images
+          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
+        msg.send image for image in imageArray
+
+  # Tredndspace bomb
+  robot.respond /(trendspace|ts) bomb( (\d+))?/i, (msg) ->
+    count = msg.match[2] || 5
+    if count > 20 then count = 20
+    msg.http("http://imgur.com/r/trendspace.json")
       .get() (err, res, body) ->
         images = JSON.parse(body)
         images = images.data
