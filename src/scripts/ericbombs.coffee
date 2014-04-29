@@ -14,7 +14,7 @@
 #   hubot woah bomb N - get N woahdude pics
 #   hubot yummy bomb N - get N shittyfoodporn pics
 #   hubot custom SUBREDDIT bomb N - get N pics from any subreddit you want
-#   hubot nope - Clear out the page with good feels
+#   hubot x - Panic button
 
 #
 # Author:
