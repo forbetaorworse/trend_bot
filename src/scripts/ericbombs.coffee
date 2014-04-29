@@ -23,193 +23,75 @@
 module.exports = (robot) ->
   # Actual bomb
   robot.respond /actual bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/bombs.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("bombs", msg)
 
   # Advice bomb
   robot.respond /advice bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/adviceanimals.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("adviceanimals", msg)
 
   # Brony bomb
   robot.respond /brony bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/clopclop.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("clopclop", msg)
 
   # Cringe bomb
   robot.respond /cringe bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/cringepics.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("cringepics", msg)
 
   # Dogecoin bomb
   robot.respond /dogecoin bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/dogecoin.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
-        msg.send "Fuck You"
+    bombMe("dogecoin", msg)
 
   # God bomb
   robot.respond /god bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/onetruegod.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("onetruegod", msg)
 
   # Idiot bomb
   robot.respond /idiot bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/idiotsfightingthings.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("idiotsfightingthings", msg)
 
   # Nature bomb
   robot.respond /nature bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/animalsbeingjerks.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("animalsbeingjerks", msg)
 
   # Tredndspace bomb
   robot.respond /(trendspace|ts) bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/trendspace.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("trendspace", msg)
 
   # Woah bomb
   robot.respond /woah bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/woahdude.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("woahdude", msg)
 
   # WTF bomb
   robot.respond /wtf bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/wtf.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("wtf", msg)
 
   # Yummy bomb
   robot.respond /yummy bomb( (\d+))?/i, (msg) ->
-    count = msg.match[2] || 5
-    if count > 20 then count = 20
-    msg.http("http://imgur.com/r/shittyfoodporn.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe("shittyfoodporn", msg)
 
   # Custom subreddit bomb
   robot.respond /custom ([\w.-]*) bomb( (\d+))?/i, (msg) ->
-    count = msg.match[3] || 5
     subreddit = msg.match[1]
-    if count > 20 then count = 20
     fuckyou =/(i?)(gore|spacedicks)/i.test subreddit
     if fuckyou
       subreddit = "aww"
       msg.send "Fuck you, I'm not doing it..."
-    msg.http("http://imgur.com/r/#{subreddit}.json")
-      .get() (err, res, body) ->
-        images = JSON.parse(body)
-        images = images.data
-        imageArray = new Array()
-        while (count -= 1)+1
-          image = msg.random images
-          imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
-        msg.send image for image in imageArray
+    bombMe(subreddit, msg)
 
   # Nope
   robot.respond /x/i, (msg) ->
     for [0..40]
       msg.send "x"
+
+bombMe = (subreddit, msg) ->
+  count = msg.match[2] || 5
+  if count > 20 then count = 20
+  msg.http("http://imgur.com/r/#{subreddit}.json")
+    .get() (err, res, body) ->
+      images = JSON.parse(body)
+      images = images.data
+      imageArray = new Array()
+      while (count -= 1)+1
+        image = msg.random images
+        imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
+      msg.send image for image in imageArray
