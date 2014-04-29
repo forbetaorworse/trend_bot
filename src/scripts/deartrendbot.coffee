@@ -36,9 +36,8 @@ responses = [
 ]
 
 module.exports = (robot) ->
-  robot.respond /dear (trendbot|trendspace|ts|faggots) .*/i, (msg) ->
+  robot.respond /dear (trendbot|trendspace|ts|faggots),? .*/i, (msg) ->
     question = msg.match[2]
     drug = drugs[Math.floor(Math.random() * reaction.length)]
     response = responses[Math.floor(Math.random() * reaction.length)].replace /123/ drug
     msg.send response
-    
