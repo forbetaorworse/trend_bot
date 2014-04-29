@@ -6,10 +6,13 @@
 #   hubot advice bomb N - get N advice animals pics
 #   hubot brony bomb N - get N brony pics
 #   hubot cringe bomb N - get N cringe pics
+#   hubot dick bomb N - get N dick pics
 #   hubot dogecoin bomb N - get N dogecoin pics
 #   hubot god bomb N - get N onetruegod pics
 #   hubot idiot bomb N - get N idiotsfightingthings pics
 #   hubot nature bomb N - get N animalsbeingjerks pics
+#   hubot porn bomb N - get N porn pics
+#   hubot tit bomb N - get N tit pics
 #   hubot trendspace bomb N - get N trendspace pics
 #   hubot woah bomb N - get N woahdude pics
 #   hubot yummy bomb N - get N shittyfoodporn pics
@@ -37,6 +40,10 @@ module.exports = (robot) ->
   robot.respond /cringe bomb( (\d+))?/i, (msg) ->
     bombMe("cringepics", msg)
 
+  # Dick bomb
+  robot.respond /dick bomb( (\d+))?/i, (msg) ->
+    bombMe("penis", msg)
+
   # Dogecoin bomb
   robot.respond /dogecoin bomb( (\d+))?/i, (msg) ->
     bombMe("dogecoin", msg)
@@ -52,6 +59,14 @@ module.exports = (robot) ->
   # Nature bomb
   robot.respond /nature bomb( (\d+))?/i, (msg) ->
     bombMe("animalsbeingjerks", msg)
+
+  # Porn bomb
+  robot.respond /porn bomb( (\d+))?/i, (msg) ->
+    bombMe("porn", msg)
+
+  # Tit bomb
+  robot.respond /tit bomb( (\d+))?/i, (msg) ->
+    bombMe("tits", msg)
 
   # Tredndspace bomb
   robot.respond /(trendspace|ts) bomb( (\d+))?/i, (msg) ->
