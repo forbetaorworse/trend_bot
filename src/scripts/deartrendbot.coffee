@@ -32,6 +32,7 @@ responses = [
   "I don't know, now help me get my 123 back from that hooker."
   "Give me some of that 123 and I'll tell you."
   "That's almost as good as this 123."
+  "Maybe you should stop being a faggot and do more 123."
 ]
 
 module.exports = (robot) ->
