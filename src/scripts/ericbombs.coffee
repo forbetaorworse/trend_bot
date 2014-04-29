@@ -14,6 +14,7 @@
 #   hubot woah bomb N - get N woahdude pics
 #   hubot yummy bomb N - get N shittyfoodporn pics
 #   hubot custom SUBREDDIT bomb N - get N pics from any subreddit you want
+#   hubot nope - Clear out the page with good feels
 
 #
 # Author:
@@ -207,3 +208,8 @@ module.exports = (robot) ->
           image = msg.random images
           imageArray.push "http://i.imgur.com/#{image.hash}#{image.ext}"
         msg.send image for image in imageArray
+
+  # Nope
+  robot.respond /x/i, (msg) ->
+    for [0..40]
+      msg.send "x"
