@@ -183,7 +183,7 @@ module.exports = (robot) ->
     if fuckyou
       subreddit = "aww"
       msg.send "Fuck you, I'm not doing it..."
-    msg.http("http://imgur.com/r/#{msg.match[1]}.json")
+    msg.http("http://imgur.com/r/#{subreddit}.json")
       .get() (err, res, body) ->
         images = JSON.parse(body)
         images = images.data
