@@ -33,8 +33,6 @@
 # Author:
 #   Eric Westbrook
 #
-# Repository:
-#   https://github.com/jhubert/hubot-tweeter
 
 Twit = require "twit"
 config =
