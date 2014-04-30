@@ -77,7 +77,7 @@ module.exports = (robot) ->
 
   #Soda bomb
   robot.respond /soda bomb( (\d+))?/i, (msg) ->
-    bombMe("wheredthesodago", msg)
+    bombMe("wheredidthesodago", msg)
 
   # Tit bomb
   robot.respond /tit bomb( (\d+))?/i, (msg) ->
