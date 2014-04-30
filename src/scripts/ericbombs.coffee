@@ -117,6 +117,16 @@ module.exports = (robot) ->
     for [0..40]
       msg.send "x"
 
+  #Bomb list
+  robot.respond /bomb list/i, (msg) ->
+    cmds = robot.helpCommands()
+    cmds = cmds.filter (cmd) ->
+      cmd.match new RegExp("bomb", 'i')
+    emit = cmds.join "\n"
+    unless robot.name.toLowerCase() is 'hubot'
+      emit = emit.replace /hubot/ig, robot.name
+    msg.send emit
+
 bombMe = (subreddit, msg) ->
   count = msg.match[2] || 5
   if count > 20 then count = 20
