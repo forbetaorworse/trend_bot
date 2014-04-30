@@ -31,7 +31,7 @@
 #   HUBOT_TWEETER_ACCOUNTS
 #
 # Author:
-#   jhubert
+#   Eric Westbrook
 #
 # Repository:
 #   https://github.com/jhubert/hubot-tweeter
@@ -52,11 +52,11 @@ unless config.accounts_json
 config.accounts = JSON.parse(config.accounts_json || "{}")
 
 module.exports = (robot) ->
-  robot.respond /tweet (.*)/i, (msg) ->
+  robot.respond /tweet/i, (msg) ->
     msg.reply "You can't very well tweet an empty status, can ya?"
     return
 
-  robot.respond /tweet\@([^\s]+)\s(.+)$/i, (msg) ->
+  robot.respond /tweet (.+)*$/i, (msg) ->
 
     username = "ihatetrendspace"
     update   = msg.match[1].trim()
