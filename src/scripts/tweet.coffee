@@ -1,69 +1,88 @@
 # Description:
-#   Display a random tweet from twitter about a subject
+#   Allows users to post a tweet to Twitter using common shared
+#   Twitter accounts.
+#
+#   Requires a Twitter consumer key and secret, which you can get by
+#   creating an application here: https://dev.twitter.com/apps
+#
+#   Based on KevinTraver's twitter.coffee script: http://git.io/iCQPyA
+#
+#   HUBOT_TWEETER_ACCOUNTS should be a string that parses to a JSON
+#   object that contains access_token and access_token_secret for each
+#   twitter screen name you want to allow people to use.
+#
+#   For example:
+#   {
+#     "hubot" : { "access_token" : "", "access_token_secret" : ""},
+#     "github" : { "access_token" : "", "access_token_secret" : ""}
+#   }
+#
+#   This also can be installed as an npm package: hubot-tweeter
+#
+# Commands:
+#   hubot tweet <update> - posts the update to twitter
 #
 # Dependencies:
-#    "ntwitter" : "https://github.com/sebhildebrandt/ntwitter/tarball/master",
+#   "twit": "1.1.8"
 #
 # Configuration:
 #   HUBOT_TWITTER_CONSUMER_KEY
 #   HUBOT_TWITTER_CONSUMER_SECRET
-#   HUBOT_TWITTER_ACCESS_TOKEN_KEY
-#   HUBOT_TWITTER_ACCESS_TOKEN_SECRET
-#
-# Commands:
-#   hubot <keyword> tweet - Returns a link to a tweet about <keyword>
-#
-# Notes:
-#   There's an outstanding issue on AvianFlu/ntwitter#110 for search and the v1.1 API.
-#   sebhildebrandt is a fork that is working, so we recommend that for now. This
-#   can be removed after the issue is fixed and a new release cut, along with updating the dependency
+#   HUBOT_TWEETER_ACCOUNTS
 #
 # Author:
-#   atmos, technicalpickles
+#   jhubert
+#
+# Repository:
+#   https://github.com/jhubert/hubot-tweeter
 
-ntwitter = require 'ntwitter'
-inspect = require('util').inspect
+Twit = require "twit"
+config =
+  consumer_key: process.env.HUBOT_TWITTER_CONSUMER_KEY
+  consumer_secret: process.env.HUBOT_TWITTER_CONSUMER_SECRET
+  accounts_json: process.env.HUBOT_TWEETER_ACCOUNTS
+
+unless config.consumer_key
+  console.log "Please set the HUBOT_TWITTER_CONSUMER_KEY environment variable."
+unless config.consumer_secret
+  console.log "Please set the HUBOT_TWITTER_CONSUMER_SECRET environment variable."
+unless config.accounts_json
+  console.log "Please set the HUBOT_TWEETER_ACCOUNTS environment variable."
+
+config.accounts = JSON.parse(config.accounts_json || "{}")
 
 module.exports = (robot) ->
-  auth =
-    consumer_key: process.env.HUBOT_TWITTER_CONSUMER_KEY
-    consumer_secret: process.env.HUBOT_TWITTER_CONSUMER_SECRET
-    access_token_key: process.env.HUBOT_TWITTER_ACCESS_TOKEN_KEY
-    access_token_secret: process.env.HUBOT_TWITTER_ACCESS_TOKEN_SECRET
+  robot.respond /tweet (.*)/i, (msg) ->
+    msg.reply "You can't very well tweet an empty status, can ya?"
+    return
 
-  twit = undefined
+  robot.respond /tweet\@([^\s]+)\s(.+)$/i, (msg) ->
 
-  robot.respond /(.+) tweet(\s*)?$/i, (msg) ->
-    unless auth.consumer_key
-      msg.send "Please set the HUBOT_TWITTER_CONSUMER_KEY environment variable."
-      return
-    unless auth.consumer_secret
-      msg.send "Please set the HUBOT_TWITTER_CONSUMER_SECRET environment variable."
-      return
-    unless auth.access_token_key
-      msg.send "Please set the HUBOT_TWITTER_ACCESS_TOKEN_KEY environment variable."
-      return
-    unless auth.access_token_secret
-      msg.send "Please set the HUBOT_TWITTER_ACCESS_TOKEN_SECRET environment variable."
+    username = ihatetrendspace
+    update   = msg.match[1].trim()
+
+    unless config.accounts[username]
+      msg.reply "I'm not setup to send tweets on behalf of #{username}. Sorry."
       return
 
+    unless update and update.length > 0
+      msg.reply "You need to actually say something, dipshit."
+      return
 
-    twit ?= new ntwitter auth
+    twit = new Twit
+      consumer_key: config.consumer_key
+      consumer_secret: config.consumer_secret
+      access_token: config.accounts[username].access_token
+      access_token_secret: config.accounts[username].access_token_secret
 
-
-    twit.verifyCredentials (err, data) ->
+    twit.post "statuses/update",
+      status: update
+    , (err, reply) ->
       if err
-        msg.send "Encountered a problem verifying twitter credentials :(", inspect err
+        data = JSON.parse(err.data).errors[0]
+        msg.reply "I can't do that. #{data.message} (error #{data.code})"
         return
-
-      q = escape(msg.match[1])
-      twit.search q, (err, data) ->
-        if err
-          msg.send "Encountered a problem twitter searching :(", inspect err
-          return
-
-        if data.statuses? and data.statuses.length > 0
-          status = msg.random data.statuses
-          msg.send "https://twitter.com/#{status.user.screen_name}/status/#{status.id_str}"
-        else
-          msg.reply "No one is tweeting about that."
+      if reply['text']
+        return msg.send "#{reply['user']['screen_name']} just tweeted: #{reply['text']}"
+      else
+        return msg.reply "Hmmm.. I'm not sure if the tweet posted. Check the account: http://twitter.com/#{username}"

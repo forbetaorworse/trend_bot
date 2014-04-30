@@ -27,7 +27,7 @@
     "jsdom": ">=0.2.0",
     "jquery": "1.7.3",
     "twitter": "0.1.18",
-    "ntwitter" : "0.5.0"
+    "twit" : "1.1.8"
   },
   "engines": {
     "node": "0.6.x",
