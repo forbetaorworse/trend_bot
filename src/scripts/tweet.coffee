@@ -50,7 +50,7 @@ unless config.accounts_json
 config.accounts = JSON.parse(config.accounts_json || "{}")
 
 module.exports = (robot) ->
-  robot.respond /tweet ?$/i, (msg) ->
+  robot.respond /tweet( )?$/i, (msg) ->
     msg.reply "You need to actually say something, dipshit."
     return
 
