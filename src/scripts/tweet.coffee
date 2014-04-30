@@ -58,7 +58,7 @@ module.exports = (robot) ->
 
   robot.respond /tweet\@([^\s]+)\s(.+)$/i, (msg) ->
 
-    username = ihatetrendspace
+    username = "ihatetrendspace"
     update   = msg.match[1].trim()
 
     unless config.accounts[username]
