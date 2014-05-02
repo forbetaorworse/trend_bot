@@ -9,9 +9,7 @@
 #
 # Commands:
 #   hubot what is <term>?         - Searches Urban Dictionary and returns definition
-#   hubot urban me <term>         - Searches Urban Dictionary and returns definition
-#   hubot urban define me <term>  - Searches Urban Dictionary and returns definition
-#   hubot urban example me <term> - Searches Urban Dictionary and returns example 
+#   hubot define <term>  - Searches Urban Dictionary and returns definition 
 #
 # Author:
 #   Travis Jeffery (@travisjeffery)
@@ -22,27 +20,15 @@
 
 module.exports = (robot) ->
 
-  robot.respond /what ?is ([^\?]*)[\?]*/i, (msg) ->
-    urbanDict msg, msg.match[1], (found, entry, sounds) ->
+  robot.respond /(define|what ?is) (.+)*/i, (msg) ->
+    urbanDict msg, msg.match[2], (found, entry, sounds) ->
       if !found
-        msg.send "I don't know what \"#{msg.match[1]}\" is"
+        msg.send "\"#{msg.match[2]}\" not found"
         return
-      msg.send "#{entry.definition}"
-      if sounds and sounds.length
-        msg.send "#{sounds.join(' ')}"
-
-
-  robot.respond /(urban)( define)?( example)?( me)? (.*)/i, (msg) ->
-    urbanDict msg, msg.match[5], (found, entry, sounds) ->
-      if !found
-        msg.send "\"#{msg.match[5]}\" not found"
-        return
-      if msg.match[3]
-        msg.send "#{entry.example}"
       else
-        msg.send "#{entry.definition}"
+        msg.send "#{msg.match[2]} : #{entry.definition}"
       if sounds and sounds.length
-        msg.send "#{sounds.join(' ')}"
+        msg.send "Audio examples: \n#{sounds.join(' ')}"
 
 urbanDict = (msg, query, callback) ->
   msg.http("http://api.urbandictionary.com/v0/define?term=#{escape(query)}")
