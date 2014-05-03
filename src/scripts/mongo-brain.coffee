@@ -28,7 +28,7 @@ Db = mongodb.Db
 module.exports = (robot) ->
   user = process.env.MONGOHQ_USERNAME || "admin"
   pass = process.env.MONGOHQ_PASSWORD || "password"
-  host = process.env.MONGOHQ_URL || "localhost"
+  host = process.env.MONGOHQ_HOST || "localhost"
   port = process.env.MONGOHQ_PORT || "27017"
   dbname = process.env.MONGOHQ_DB || "hubot"
 
@@ -38,7 +38,7 @@ module.exports = (robot) ->
     console.log err
 
   server = new Server host, port , {}
-  if host == 'mongodb://heroku:uoWm7Zmk-KNojIhIflT6IxMX0_5Hx8gHc15GZBSqPoWIGqKb6I_d3DLtuSLr_-P_0t7eYcLqg7xSsokyz1RXzw@oceanic.mongohq.com:10061/app9637361'
+  if host == 'oceanic.mongohq.com:10061/app9637361'
       server = new Server host , {}
   db = new Db dbname, server, { w: 1, native_parser: true }
 
