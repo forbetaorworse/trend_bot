@@ -32,15 +32,14 @@ module.exports = (robot) ->
   port = process.env.MONGOHQ_PORT || "27017"
   dbname = process.env.MONGOHQ_DB || "hubot"
 
-  if host == 'mongodb://heroku:uoWm7Zmk-KNojIhIflT6IxMX0_5Hx8gHc15GZBSqPoWIGqKb6I_d3DLtuSLr_-P_0t7eYcLqg7xSsokyz1RXzw@oceanic.mongohq.com:10061/app9637361'
-    port = ''
-
 
   error = (err) ->
     console.log "==MONGO BRAIN UNAVAILABLE==\n==SWITCHING TO MEMORY BRAIN=="
     console.log err
 
-  server = new Server host, port, {}
+  server = new Server host, port , {}
+  if host == 'mongodb://heroku:uoWm7Zmk-KNojIhIflT6IxMX0_5Hx8gHc15GZBSqPoWIGqKb6I_d3DLtuSLr_-P_0t7eYcLqg7xSsokyz1RXzw@oceanic.mongohq.com:10061/app9637361'
+      server = new Server host , {}
   db = new Db dbname, server, { w: 1, native_parser: true }
 
   db.open (err, client) ->
