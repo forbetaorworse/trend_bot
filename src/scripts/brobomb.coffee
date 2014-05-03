@@ -2,9 +2,7 @@
 #   Bro bomb
 #
 # Commands:
-#   hubot dick bomb N - get N dicks
-#   hubot tit bomb N - get N tits
-#   hubot porn bomb N - get N porns
+
 #
 # Author:
 #   Chris & Eric, TRENDSPACE INTERNET COMPANY INC
