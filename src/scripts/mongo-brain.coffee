@@ -29,49 +29,41 @@ url = require 'url'
 module.exports = (robot) ->
   user = process.env.MONGOHQ_USERNAME || "admin"
   pass = process.env.MONGOHQ_PASSWORD || "password"
-  host = process.env.MONGOHQ_URL || "localhost"
   port = process.env.MONGOHQ_PORT || "27017"
   dbname = process.env.MONGOHQ_DB || "hubot"
+  host = process.env.MONGOHQ_URL || "mongodb://#{user}:#{pass}@localhost:#{port}/#{dbname}"
+
+  connection_uri = url.parse(host)
+  if host != 'mongodb://#{user}:#{pass}@localhost:#{port}/#{dbname}'
+    dbname = connection_uri.pathname.replace(/^\//, '')
 
 
   error = (err) ->
     console.log "==MONGO BRAIN UNAVAILABLE==\n==SWITCHING TO MEMORY BRAIN=="
     console.log err
 
-  server = new Server host, port , {}
-  if host == 'mongodb://heroku:uoWm7Zmk-KNojIhIflT6IxMX0_5Hx8gHc15GZBSqPoWIGqKb6I_d3DLtuSLr_-P_0t7eYcLqg7xSsokyz1RXzw@oceanic.mongohq.com:10061/app9637361'
-    connection_uri = url.parse(host)
-    dbname = connection_uri.pathname.replace(/^\//, '')
-    server = new Server host , {}
-  db = new Db dbname, server, { w: 1, native_parser: true }
 
-
-  db.connect host, (err, client)->
+  Db.connect host, (err, client)->
     return error err if err
     robot.logger.debug "We've connected!"
 
-    db.authenticate user, pass, (err, success) ->
+    collection = new Collection client, 'hubot_storage'
+    collection.find().limit(1).toArray (err, results) ->
       return error err if err
 
-      robot.logger.debug 'Successfully authenticated with mongo'
+      robot.logger.debug 'Successfully queried mongo'
+      robot.logger.debug Util.inspect(results, false, 4)
 
-      collection = new Collection client, 'hubot_storage'
+      if results.length > 0
+        robot.brain.data = results[0]
+        robot.brain.emit 'loaded', results[0]
+      else
+        robot.logger.debug 'No results found'
 
-      collection.find().limit(1).toArray (err, results) ->
-        return error err if err
+    robot.brain.on 'save', (data) ->
+      robot.logger.debug 'Save event caught by mongo'
+      robot.logger.debug Util.inspect(robot.brain.data, false, 4)
 
-        robot.logger.debug 'Successfully queried mongo'
-        robot.logger.debug Util.inspect(results, false, 4)
-
-        if results.length > 0
-          robot.brain.data = results[0]
-          robot.brain.emit 'loaded', results[0]
-        else
-          robot.logger.debug 'No results found'
-
-      robot.brain.on 'save', (data) ->
-        robot.logger.debug 'Save event caught by mongo'
-        robot.logger.debug Util.inspect(robot.brain.data, false, 4)
-
-        collection.save robot.brain.data, (err) ->
-          console.warn err if err?
+      collection.save robot.brain.data, (err) ->
+        console.warn err if err?
+        
