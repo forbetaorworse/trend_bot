@@ -1,1 +1,1 @@
-web: bin/hubot -a campfire -n 'Trend Person' --enable-slash
+web: bin/hubot -a campfire -n 'trendbot' --enable-slash

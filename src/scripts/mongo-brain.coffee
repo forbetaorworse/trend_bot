@@ -26,11 +26,11 @@ Collection = mongodb.Collection
 Db = mongodb.Db
 
 module.exports = (robot) ->
-  user = process.env.MONGODB_USERNAME || "admin"
-  pass = process.env.MONGODB_PASSWORD || "password"
-  host = process.env.MONGODB_HOST || "localhost"
-  port = process.env.MONGODB_PORT || "27017"
-  dbname = process.env.MONGODB_DB || "hubot"
+  user = process.env.MONGOHQ_USERNAME || "admin"
+  pass = process.env.MONGOHQ_PASSWORD || "password"
+  host = process.env.MONGOHQ_URL || "localhost"
+  port = process.env.MONGOHQ_PORT || "27017"
+  dbname = process.env.MONGOHQ_DB || "hubot"
 
   error = (err) ->
     console.log "==MONGO BRAIN UNAVAILABLE==\n==SWITCHING TO MEMORY BRAIN=="
