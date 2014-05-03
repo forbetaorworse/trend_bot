@@ -28,8 +28,8 @@ Db = mongodb.Db
 module.exports = (robot) ->
   user = process.env.MONGOHQ_USERNAME || "admin"
   pass = process.env.MONGOHQ_PASSWORD || "password"
-  host = process.env.MONGOHQ_URL || "localhost"
-  port = process.env.MONGOHQ_PORT || "27017"
+  host = process.env.MONGOHQ_HOST || "localhost"
+  port = process.env.MONGOHQ_PORT || "10061"
   dbname = process.env.MONGOHQ_DB || "hubot"
 
   error = (err) ->
