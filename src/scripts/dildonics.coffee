@@ -16,12 +16,10 @@ module.exports = (robot) ->
 	robot.respond /dildonics$/i, (msg) ->
 		fagocity+=1
 		robot.brain.data.fagocity = fagocity
-		robot.brain.emit 'save'
 		msg.send "Warning! Current level of fagocity in TRENDSPACE is now #{fagocity}."
 
 
 	robot.respond /dedildonics$/i, (msg) ->
 		fagocity-=1
 		robot.brain.data.fagocity = fagocity
-		robot.brain.emit 'save'
 		msg.send "Notice. Current level of fagocity in TRENDSPACE has now stabalized to #{fagocity}."
