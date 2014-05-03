@@ -16,6 +16,7 @@
 #   hubot reaction bomb N - get N chemicalreactiongifs pics
 #   hubot russia bomb N - get N A normal day in russia pics
 #   hubot soda bomb N - get N where'd the soda go pics
+#   hubot space bomb N - get N space pics
 #   hubot tit bomb N - get N tit pics
 #   hubot trendspace bomb N - get N trendspace pics
 #   hubot woah bomb N - get N woahdude pics
@@ -83,6 +84,10 @@ module.exports = (robot) ->
   #Soda bomb
   robot.respond /soda bomb( (\d+))?/i, (msg) ->
     bombMe("wheredidthesodago", msg)
+
+  #Space bomb
+  robot.respond /space bomb( (\d+))?/i, (msg) ->
+    bombMe("space", msg)
 
   # Tit bomb
   robot.respond /tit bomb( (\d+))?/i, (msg) ->
