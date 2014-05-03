@@ -24,11 +24,12 @@ mongodb = require "mongodb"
 Server = mongodb.Server
 Collection = mongodb.Collection
 Db = mongodb.Db
+url = require 'url'
 
 module.exports = (robot) ->
   user = process.env.MONGOHQ_USERNAME || "admin"
   pass = process.env.MONGOHQ_PASSWORD || "password"
-  host = process.env.MONGOHQ_HOST || "localhost"
+  host = process.env.MONGOHQ_URL || "localhost"
   port = process.env.MONGOHQ_PORT || "27017"
   dbname = process.env.MONGOHQ_DB || "hubot"
 
@@ -38,14 +39,16 @@ module.exports = (robot) ->
     console.log err
 
   server = new Server host, port , {}
-  if host == 'oceanic.mongohq.com:10061/app9637361'
-      server = new Server host , {}
+  if host == 'mongodb://heroku:uoWm7Zmk-KNojIhIflT6IxMX0_5Hx8gHc15GZBSqPoWIGqKb6I_d3DLtuSLr_-P_0t7eYcLqg7xSsokyz1RXzw@oceanic.mongohq.com:10061/app9637361'
+    connection_uri = url.parse(host)
+    dbname = connection_uri.pathname.replace(/^\//, '')
+    server = new Server host , {}
   db = new Db dbname, server, { w: 1, native_parser: true }
 
-  db.open (err, client) ->
-    return error err if err
 
-    robot.logger.debug 'Successfully opened connection to mongo'
+  db.connect host, (err, client)->
+    return error err if err
+    robot.logger.debug "We've connected!"
 
     db.authenticate user, pass, (err, success) ->
       return error err if err
