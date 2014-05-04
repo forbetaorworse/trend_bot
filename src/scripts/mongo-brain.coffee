@@ -1,7 +1,5 @@
 # Description:
-#  Enhances hubot-brain with MongoDB. Useful for Heroku accounts that want
-#  better persistance. Falls back to memory brain if Mongo connection fails
-#  for local testing.
+#  This is an update to the mongo-brain that workd for mongohq on heroku
 #
 # Dependencies:
 #   "mongodb": ">= 1.2.0"
@@ -17,7 +15,7 @@
 #   None
 #
 # Author:
-#   ajacksified, maxbeatty
+#   Eric Westbrook
 
 Util = require "util"
 mongodb = require "mongodb"
@@ -66,4 +64,3 @@ module.exports = (robot) ->
 
       collection.save robot.brain.data, (err) ->
         console.warn err if err?
-        
