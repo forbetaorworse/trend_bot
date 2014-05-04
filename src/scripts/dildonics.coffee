@@ -22,9 +22,11 @@ module.exports = (robot) ->
 		msg.send "Warning! Current level of fagocity in TRENDSPACE is now #{fagocity}."
 
 
-	robot.respond /(dedildonics|fagocity( )?-)( (\d+))?/i, (msg) ->
+	robot.respond /(dedildonics|fagocity( )?-)( ?(\d+))?/i, (msg) ->
 		if msg.match[4]
 			fagocity -= Number(msg.match[4])
+		else if msg.match[3]
+			fagocity -= Number(msg.match[3])
 		else
 			fagocity -= 1
 		robot.brain.data.fagocity = fagocity
