@@ -13,9 +13,9 @@ module.exports = (robot) ->
 		else fagocity = 1
 		console.log("Current level of fagocity: #{fagocity}")
 
-	robot.respond /(dildonics|fagocity)( (\d+))?/i, (msg) ->
-		if msg.match[2]
-			fagocity += Number(msg.match[2])
+	robot.respond /(dildonics|fagocity(?!( ?-)))( (\d+))?/i, (msg) ->
+		if msg.match[3]
+			fagocity += Number(msg.match[3])
 		else
 			fagocity += 1
 		robot.brain.data.fagocity = fagocity
