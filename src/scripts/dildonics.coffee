@@ -29,3 +29,8 @@ module.exports = (robot) ->
 			fagocity -= 1
 		robot.brain.data.fagocity = fagocity
 		msg.send "Notice. Current level of fagocity in TRENDSPACE has been lowered to #{fagocity}."
+
+	robot.respond /dildonics reset/i, (msg) ->
+		fagocity = 0
+		robot.brain.data.fagocity = fagocity
+		msg.send "Fagocity has been reset back to zero. We are safe now."
