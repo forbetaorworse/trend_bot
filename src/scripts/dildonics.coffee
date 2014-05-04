@@ -8,9 +8,9 @@
 module.exports = (robot) ->
 	fagocity = 0
 	robot.brain.on 'loaded', ->
-		# if robot.brain.data.fagocity?
-		# 	fagocity = robot.brain.data.fagocity
-		# else fagocity = 1
+		if robot.brain.data.fagocity?
+			fagocity = robot.brain.data.fagocity
+		else fagocity = 1
 		console.log("Current level of fagocity: #{fagocity}")
 
 	robot.respond /(dildonics|fagocity)( (\d+))?/i, (msg) ->
