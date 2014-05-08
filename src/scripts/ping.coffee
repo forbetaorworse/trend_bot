@@ -13,10 +13,12 @@ module.exports = (robot) ->
     msg.send "PONGSPACE, you guys!!! Ha Ha drugs meaning (2014 I-H8-TRENDSPACE Edition)"
 
   robot.respond /(ping|assembl(e)?|call)(ing)?( all)? ((trend|gay)m'n|fag(g)?[i|e|o](t(t)?s)?)$/i, (msg) ->
-    reply = "Hey, listen up all you jerks. We need all trend'm assembled\n"
+    reply = "Hey, listen up all you jerks. We need all trendm'n assembled\n"
     for own key, user of robot.brain.data.users
       reply += "ping #{user.name}\n"
+
     reply += "#{msg.message.user.name} called this meeting. All present say pong."
+
     msg.send reply
 
   robot.respond /SCRIMB$/i, (msg) ->

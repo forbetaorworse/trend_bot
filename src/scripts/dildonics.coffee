@@ -26,7 +26,7 @@ module.exports = (robot) ->
 				response += "#{user.name} has a fagocity of #{user.score}\n"
 		msg.send response
 
-	robot.respond /fagocity down ([\w.-]*)$/i, (msg) ->
+	robot.respond /fagocity down (.*)$/i, (msg) ->
 		addUsersToFagocity(robot)
 		username = msg.match[1]
 		userId = robot.brain.userForName username
@@ -37,7 +37,7 @@ module.exports = (robot) ->
 		else
 			msg.send "User #{username} does not exist"
 
-	robot.respond /fagocity up ([\w.-]*)$/i, (msg) ->
+	robot.respond /fagocity up (.*)$/i, (msg) ->
 		addUsersToFagocity(robot)
 		username = msg.match[1]
 		userId = robot.brain.userForName username
