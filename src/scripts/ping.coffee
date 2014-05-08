@@ -16,7 +16,9 @@ module.exports = (robot) ->
     reply = "Hey, listen up all you jerks. We need all trend'm assembled\n"
     for own key, user of robot.brain.data.users
       reply += "ping #{user.name}\n"
+
     reply += "#{msg.message.user.name} called this meeting. All present say pong."
+
     msg.send reply
 
   robot.respond /SCRIMB$/i, (msg) ->
