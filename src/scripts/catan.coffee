@@ -9,54 +9,63 @@
 #
 #
 # Author:
-#	Eric Motherfucking Westbrook
+#	Eric M.F. Westbrook
 #
 
 
-# Object Classes
+####################################
+############## Config ##############
+####################################
 
 # Default game config
-
 default_game_config = 
 	landTilePlacement: 'default'
 	portTilePlacement: 'default'
 
+############ END CONFIG ############
+
+
+####################################
+########## Object Classes ##########
+####################################
 
 # App wrapper object
 class Catan
+	# @cache - this is all of the data for catan.
+
+	# addGame - Adds a created game to catan
+	# newGame(game_config, players) - Creates a new game
 	@cache = []
 	constructor: (@robot) ->
 		@cache = []
 		@robot.brain.on 'loaded', =>
 			if @robot.brain.data.catan
 				@cache = @robot.brain.data.catan
+			@robot.brain.data.catan = @cache
 	addGame: (game) ->
 		@cache.push game
 		@robot.brain.data.catan = @cache
+	newGame: (game_config, players) ->
+		game = new Game game_config
+		for player in players
+			game.addPlayer(@robot, player)
+		@cache.push game
+		@robot.brain.data.catan = @cache
+
+
 
 # Game object
 class Game
 	# @game_config - The configuration of the game
 	# @board - The board of the game
 	# @dice - The dice of the game
-	# @dev_deck - The deck of development cards
+	# @bank - The bank containing resources and development cards
+	# @players - Players playing the game
 
-	# build_deck - Builds the development card deck
-	build_deck: ->
-		devDeckTemp = []
-		for [1..@game_config.devDeck.knight]
-			devCard = new DevCard 'knight'
-			devDeckTemp.push devCard
-		for [1..@game_config.devDeck.victoryPoint]
-			devCard = new DevCard 'victoryPoint'
-			devDeckTemp.push devCard
-		for [1..@game_config.devDeck.road]
-			devCard = new DevCard 'road'
-			devDeckTemp.push devCard
-		for [1..@game_config.devDeck.monopoly]
-			devCard = new DevCard 'monopoly'
-			devDeckTemp.push devCard
-		devDeckTemp.shuffle()
+	# addPlayer(player) - Adds a player to the game
+	addPlayer: (robot, player) ->
+		userId = robot.brain.userForName player
+		@players.push new Player userId
 
 	constructor: (game_config) ->
 		@game_config = 
@@ -85,16 +94,33 @@ class Game
 				road: 2
 				monopoly: 2
 				yearOfPlenty: 2
-		@board = new Board @gameconfig
+		@board = new Board @game_config
 		@dice = new Dice
-		@dev_deck = @build_deck()
+		@bank = new Bank @game_config
+		@players = []
 
 
 # Player object
 class Player
-	constructor: (@game, @user) ->
-
-
+	# @id - The user ID of the player
+	# @devHand - Development Cards player has in their hand
+	# @devPlayed - Development Cards player has spent
+	# @availableSettlements - Settlements player has available to them
+	# @availableCities - Cities player has available to them
+	# @availableRoads - Road pieces player has available to them
+	# @victoryPoints - Number of victory points player has
+	constructor: (user) ->
+		@id = user
+		@availableSettlements = []
+		for [1..5]
+			@availableSettlements.push new Settlement
+		@availableCities = []
+		for [1..4]
+			@availableCities.push new City
+		@availableRoads = []
+		for [1..15]
+			@availableRoads.push new Road
+		@victoryPoints = 0
 # Board object
 class Board
 	# @landTiles - A collection of all the land tiles on the board
@@ -154,6 +180,9 @@ class Board
 					tile = new Tile 'wheatDeal'
 					portTilesTemp.push tile
 			portTilesTemp.shuffle()
+			count = 0
+			for [0..portTilesTemp.length]
+				portTilesTemp[count].setTileNumber game_config.tileNumbers[countTwo]
 			@portTiles = portTilesTemp;
 
 
@@ -162,6 +191,8 @@ class Board
 class Tile
 	# @type - The type of tile (brick, livestock, etc...)
 	# @tileNumber - The number the dice must hit to claim a resource
+	# @commonLandPoints - Intersections where tiles meet other land tiles
+	# @commonPortPoints - Intersections where tiles meet other port tiles
 	setTileNumber: (tileNumber) ->
 		@tileNumber = tileNumber
 		if @type.indexOf "Deal" > -1
@@ -173,15 +204,23 @@ class Tile
 				addCommonLand "C", 1, "E"
 				addCommonLand "C", 12, "A"
 				addCommonLand "D", 12, "F"
+				addCommonLand "D", 11, "B"
 				addCommonLand "E", 11, "A"
+
+				addCommonPort "A", 0, "C"
+				addCommonPort "D", 0, "F"
 			else if tileNumber == 1
 				addCommonLand "B", 2, "F"
+				addCommonLand "C", 2, "E"
 				addCommonLand "C", 13, "A"
 				addCommonLand "D", 13, "F"
 				addCommonLand "D", 12, "B"
 				addCommonLand "E", 12, "A"
 				addCommonLand "E", 0, "C"
 				addCommonLand "F", 0, "B"
+
+				addCommonPort "B", 1, "D"
+				addCommonPort "A", 1, "E"
 			else if tileNumber == 2
 				addCommonLand "C", 3, "A"
 				addCommonLand "D", 3, "F"
@@ -189,6 +228,9 @@ class Tile
 				addCommonLand "E", 13, "A"
 				addCommonLand "E", 1, "C"
 				addCommonLand "F", 1, "B"
+
+				addCommonPort "F", 1, "D"
+				addCommonPort "C", 2, "E"
 			else if tileNumber == 3
 				addCommonLand "A", 2, "C"
 				addCommonLand "C", 4, "A"
@@ -198,6 +240,9 @@ class Tile
 				addCommonLand "E", 13, "C"
 				addCommonLand "F", 13, "B"
 				addCommonLand "F", 2, "D"
+
+				addCommonPort "A", 2, "E"
+				addCommonPort "B", 2, "D"
 			else if tileNumber == 4
 				addCommonLand "A", 3, "C"
 				addCommonLand "D", 5, "B"
@@ -205,13 +250,20 @@ class Tile
 				addCommonLand "E", 14, "C"
 				addCommonLand "F", 14, "B"
 				addCommonLand "F", 3, "D"
+
+				addCommonPort "B", 3, "F"
+				addCommonPort "C", 3, "E"
 			else if tileNumber == 5
+				addCommonLand "A", 14, "C"
 				addCommonLand "A", 4, "E"
 				addCommonLand "D", 6, "B"
 				addCommonLand "E", 6, "A"
 				addCommonLand "E", 15, "C"
 				addCommonLand "F", 15, "B"
 				addCommonLand "F", 14, "D"
+
+				addCommonPort "C", 4, "A"
+				addCommonPort "D", 4, "F"
 			else if tileNumber == 6
 				addCommonLand "A", 15, "C"
 				addCommonLand "A", 5, "E"
@@ -219,6 +271,9 @@ class Tile
 				addCommonLand "E", 7, "C"
 				addCommonLand "F", 7, "B"
 				addCommonLand "F", 15, "D"
+
+				addCommonPort "B", 4, "F"
+				addCommonPort "E", 5, "A"
 			else if tileNumber == 7
 				addCommonLand "A", 16, "C"
 				addCommonLand "A", 15, "E"
@@ -228,6 +283,9 @@ class Tile
 				addCommonLand "E", 8, "C"
 				addCommonLand "F", 8, "B"
 				addCommonLand "F", 16, "D"
+
+				addCommonPort "C", 5, "A"
+				addCommonPort "D", 5, "F"
 			else if tileNumber == 8
 				addCommonLand "A", 9, "C"
 				addCommonLand "A", 17, "E"
@@ -235,6 +293,9 @@ class Tile
 				addCommonLand "B", 7, "F"
 				addCommonLand "C", 7, "E"
 				addCommonLand "F", 9, "D"
+
+				addCommonPort "D", 6, "B"
+				addCommonPort "E", 6, "A"
 			else if tileNumber == 9
 				addCommonLand "A", 10, "C"
 				addCommonLand "A", 17, "E"
@@ -243,6 +304,9 @@ class Tile
 				addCommonLand "C", 16, "E"
 				addCommonLand "C", 8, "A"
 				addCommonLand "F", 10, "D"
+
+				addCommonPort "E", 7, "C"
+				addCommonPort "F", 7, "B"
 			else if tileNumber == 10
 				addCommonLand "A", 11, "E"
 				addCommonLand "B", 11, "D"
@@ -250,6 +314,9 @@ class Tile
 				addCommonLand "C", 17, "E"
 				addCommonLand "C", 9, "A"
 				addCommonLand "D", 9, "F"
+
+				addCommonPort "A", 8, "C"
+				addCommonPort "D", 7, "B"
 			else if tileNumber == 11
 				addCommonLand "A", 0, "E"
 				addCommonLand "B", 0, "D"
@@ -258,6 +325,8 @@ class Tile
 				addCommonLand "D", 17, "F"
 				addCommonLand "D", 10, "B"
 				addCommonLand "E", 10, "A"
+				addCommonPort "E", 8, "C"
+				addCommonPort "F", 8, "B"
 			else if tileNumber == 12
 				addCommonLand "A", 0, "C"
 				addCommonLand "A", 1, "E"
@@ -338,7 +407,7 @@ class Tile
 				addCommonLand "F", 11, "D"
 			else if tileNumber == 18
 				addCommonLand "A", 12, "C"
-				addCommonLand "A", 13, "A"
+				addCommonLand "A", 13, "E"
 				addCommonLand "B", 13, "D"
 				addCommonLand "B", 14, "F"
 				addCommonLand "C", 14, "E"
@@ -349,15 +418,28 @@ class Tile
 				addCommonLand "E", 17, "C"
 				addCommonLand "F", 17, "B"
 				addCommonLand "F", 12, "D"
+
 	setCommonLand: (corner, neighborTile, neighborCorner) ->
 		# Create associations between shared corners
+		point =
+			corner: corner
+			neighborTile: neighborTile
+			neighborCorner: neighborCorner
+		@commonLandPoints.push point
+	setCommonPort: (corner, neighborTile, neighborCorner) ->
+		# Create associations between shared corners with ports
+		point =
+			corner: corner
+			neighborhTile: neighborTile
+			neighborCorner: neighborCorner
+		@commonPortPoints.push point
 	constructor: (type) ->
 		@type = type
 
 # Resource Card object
 class Resource
 	# @type - The type of resource (brick, livestock, etc...)
-	constructor: (@game) ->
+	constructor: (type) ->
 		@type = type
 
 
@@ -366,12 +448,49 @@ class Resource
 class DevCard
 	# @type - The type of development card
 	# @description - The description of the development card
-	constructor:  ->
+	constructor: (type) ->
 		@type = type
 
 
 # Bank object
 class Bank
+	# @resources - Resources in the bank
+	# @devDeck - Deck of development cards in the bank
+
+	# build_deck - Builds the development card deck
+	build_deck: (game_config) ->
+		devDeckTemp = []
+		for [1..game_config.devDeck.knight]
+			devCard = new DevCard 'knight'
+			devDeckTemp.push devCard
+		for [1..game_config.devDeck.victoryPoint]
+			devCard = new DevCard 'victoryPoint'
+			devDeckTemp.push devCard
+		for [1..game_config.devDeck.road]
+			devCard = new DevCard 'road'
+			devDeckTemp.push devCard
+		for [1..game_config.devDeck.monopoly]
+			devCard = new DevCard 'monopoly'
+			devDeckTemp.push devCard
+		devDeckTemp.shuffle()
+		@devDeck = devDeckTemp
+
+	constructor: (game_config) ->
+		@resources = []
+		@resources["brick"] = []
+		@resources["livestock"] = []
+		@resources["lumber"] = []
+		@resources["ore"] = []
+		@resources["wheat"] = []
+		for [1..19]
+			@resources.brick.push new Resource "brick"
+			@resources.livestock.push new Resource "livestock"
+			@resources.lumber.push new Resource "lumber"
+			@resources.ore.push new Resource "ore"
+			@resources.wheat.push new Resource "wheat"
+		@build_deck game_config
+
+
 
 
 
@@ -405,12 +524,47 @@ class Road
 # Settlement object
 class Settlement
 
-# Town object
-class Town
+# City object
+class City
+
+######## End Object Classes ########
+
+####################################
+########### Instantiator ###########
+####################################
 
 module.exports = (robot) ->
-	catan = new Catan robot
+	@catan = new Catan robot
 
+######### END Instantiator #########
+
+####################################
+######## Message responders ########
+####################################
+
+	robot.respond /catan link/i, (msg) ->
+
+###### End Message responders ######
+
+
+####################################
+########## HTTP responders #########
+####################################
+
+	robot.router.get '/catan', (request, response) ->
+		catan.newGame default_game_config, ["shell"]
+		console.log "It worked"
+		console.log robot.brain.data.catan[0].bank.devDeck
+		console.log robot.brain.data.catan[0].board.landTiles
+		console.log robot.brain.data.catan[0].board.portTiles
+		response.end homeContents "TRENDSPACE - Settlers of Catan"
+
+######## End HTTP responders #######
+
+
+####################################
+########## Custom Methods ##########
+####################################
 
 # Shuffle array method
 do -> Array::shuffle ?= ->
@@ -418,3 +572,34 @@ do -> Array::shuffle ?= ->
     j = Math.floor Math.random() * (i + 1)
     [@[i], @[j]] = [@[j], @[i]]
   @
+
+######## End Custom Methods ########
+
+
+
+
+####################################
+############# Templates ############
+####################################
+
+homeContents = (title) ->
+
+  """
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <script src="/js/backbone/backbone-min.js"></script>
+  <script src="/js/jquery/jquery-min.js"></script>
+  <script src="/js/underscore/underscore-min.js"></script>
+  <script src="/js/catan.js"></script>
+  <title>#{title}</title>
+  </head>
+  <body>
+    <h1>Welcome to Catan</h1>
+    <div class="commands">
+      <p>You have arrived.</p>
+    </div>
+  </body>
+</html>
+  """

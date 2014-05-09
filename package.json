@@ -1,17 +1,21 @@
 {
-  "name": "hubot",
-  "version": "2.7.3",
+  "name": "Trendbot",
+  "version": "1.0.0",
 
-  "author": "hubot",
+  "author": "Trendspace",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/forbetaorworse/trend_bot"
+  },
 
   "keywords": [
-    "github",
+    "Trendspace",
     "hubot",
     "campfire",
     "bot"
   ],
 
-  "description": "A simple helpful robot for your Company",
+  "description": "TRENDSPACE's web platform. We were in awe with hubot's power on responding to http requests. We plugged mongodb in and now we have a full-on (erection &) web application. Hubot as a platform.",
 
   "licenses": [{
     "type": "MIT",

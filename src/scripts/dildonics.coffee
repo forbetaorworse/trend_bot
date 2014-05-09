@@ -17,6 +17,11 @@ module.exports = (robot) ->
 			user_fagocities = robot.brain.data.user_fagocities
 		robot.brain.data.user_fagocities = user_fagocities
 
+
+
+
+
+
 	robot.respond /fagocity stats( ([\w.-]*))?$/i, (msg) ->
 		username = msg.match[1]
 		addUsersToFagocity(robot)
@@ -25,6 +30,11 @@ module.exports = (robot) ->
 			if user
 				response += "#{user.name} has a fagocity of #{user.score}\n"
 		msg.send response
+
+
+
+
+
 
 	robot.respond /fagocity down (.*)$/i, (msg) ->
 		addUsersToFagocity(robot)
@@ -37,6 +47,12 @@ module.exports = (robot) ->
 		else
 			msg.send "User #{username} does not exist"
 
+
+
+
+
+
+
 	robot.respond /fagocity up (.*)$/i, (msg) ->
 		addUsersToFagocity(robot)
 		username = msg.match[1]
@@ -48,6 +64,10 @@ module.exports = (robot) ->
 		else
 			msg.send "User #{username} does not exist"
 
+
+
+
+
 	robot.respond /(dildonics|fagocity(?!( ?-)))( (\d+))?$/i, (msg) ->
 		if msg.match[3]
 			fagocity += Number(msg.match[3])
@@ -55,6 +75,10 @@ module.exports = (robot) ->
 			fagocity += 1
 		robot.brain.data.fagocity = fagocity
 		msg.send "Warning! Current level of fagocity in TRENDSPACE is now #{fagocity}."
+
+
+
+
 
 
 	robot.respond /(dedildonics|fagocity( )?-)( ?(\d+))?$/i, (msg) ->
@@ -67,10 +91,20 @@ module.exports = (robot) ->
 		robot.brain.data.fagocity = fagocity
 		msg.send "Notice. Current level of fagocity in TRENDSPACE has been lowered to #{fagocity}."
 
+
+
+
+
+
 	robot.respond /dildonics reset/i, (msg) ->
 		fagocity = 0
 		robot.brain.data.fagocity = fagocity
 		msg.send "Fagocity has been reset back to zero. We are safe now."
+	
+
+
+
+
 	
 	addUsersToFagocity = (@robot)->
 		for userId, user of @robot.brain.data.users
