@@ -267,7 +267,8 @@ class Robot
   setupExpress: ->
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
-    stat    = process.cwd() + process.env.EXPRESS_STATIC
+    process.env.PWD = process.cwd()
+    stat    = process.env.PWD + process.env.EXPRESS_STATIC
 
     express = require 'express'
     @sass = require "node-sass"
