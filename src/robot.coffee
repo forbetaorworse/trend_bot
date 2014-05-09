@@ -270,6 +270,7 @@ class Robot
     stat    = process.cwd() + process.env.EXPRESS_STATIC
 
     express = require 'express'
+    @sass = require "node-sass"
 
     app = express()
 
@@ -281,6 +282,11 @@ class Robot
     app.use express.query()
     app.use express.bodyParser()
     app.use express.static stat if stat
+    app.use @sass.middleware(
+      src: process.cwd() + process.env.EXPRESS_STATIC + "/styles/sass/"
+      dest: process.cwd() + process.env.EXPRESS_STATIC + "/styles/"
+      debug: true
+    )
 
     try
       @server = app.listen(process.env.PORT || 8080, process.env.BIND_ADDRESS || '0.0.0.0')

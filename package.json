@@ -43,7 +43,8 @@
     "twitter": "0.1.18",
     "twit" : ">=1.1.8",
     "instagram-node-lib" : ">=0.1.1",
-    "mongodb": ">= 1.2.0"
+    "mongodb": ">= 1.2.0",
+    "node-sass": ">=0.8.6"
   },
 
   "engines": {
