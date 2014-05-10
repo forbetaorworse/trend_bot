@@ -284,8 +284,8 @@ class Robot
     app.use express.bodyParser()
     app.use express.static stat if stat
     app.use @sass.middleware(
-      src: __dirname + "/styles/sass/"
-      dest: __dirname + "/styles/"
+      src: stat + "/styles/sass/"
+      dest: stat + "/styles/"
       debug: true
     )
 
