@@ -15,7 +15,7 @@ module.exports = (robot) ->
 		outFile: "#{stylespath}facetogif.css"
 		outputStyle: "compressed"
 		success: () ->
-			console.log "CSS compressed and saved: catan.scss"
+			console.log "CSS compressed and saved: facetogif.scss"
 		error: (error) ->
 			console.log(error)
 
