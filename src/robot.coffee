@@ -268,7 +268,6 @@ class Robot
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
     stat    = process.cwd() + (process.env.EXPRESS_STATIC || "/public")
-    console.log "HERE HERE! " + stat
 
     express = require 'express'
     @sass = require "node-sass"
@@ -282,12 +281,12 @@ class Robot
     app.use express.basicAuth user, pass if user and pass
     app.use express.query()
     app.use express.bodyParser()
-    app.use express.static stat if stat
     app.use @sass.middleware(
-      src: stat + "/styles/sass/"
-      dest: stat + "/styles/"
+      src: process.cwd() + "/src/"
+      dest: stat
       debug: true
     )
+    app.use express.static stat if stat
 
     try
       @server = app.listen(process.env.PORT || 8080, process.env.BIND_ADDRESS || '0.0.0.0')
