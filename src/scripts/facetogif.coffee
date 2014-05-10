@@ -8,6 +8,17 @@
 
 		
 module.exports = (robot) ->
+	stylespath    = process.cwd() + (process.env.EXPRESS_STATIC || "/public") + "/styles/"
+
+	robot.sass.renderFile 
+		file: "#{stylespath}sass/facetogif.scss"
+		outFile: "#{stylespath}facetogif.css"
+		outputStyle: "compressed"
+		success: () ->
+			console.log "CSS compressed and saved: catan.scss"
+		error: (error) ->
+			console.log(error)
+
 	robot.respond /gif me$/i, (msg) ->
 		console.log process.env
 		host = process.env.HEROKU_URL || "http://localhost:8080"
@@ -24,7 +35,7 @@ homeContents = (title) ->
 	  <head>
 	    <meta charset=utf-8>
 	    <title>#{title}</title>
-	    <link href=app.css?v=1 rel=stylesheet>
+	    <link href="/styles/facetogif.css" rel="stylesheet" />
 	    <meta name=viewport content="width=device-width, initial-scale=1.0">
 	  </head>
 	  <body>
@@ -92,8 +103,8 @@ homeContents = (title) ->
 	      <a class="ui-button upload img control to-imgur" href=http://imgur.com target=_blank>imgur</a>
 	      <a class="ui-button remove img control to-danger">x</a>
 	    </div>
-	  <script src=js/vendor/gif.js></script>
-	  <script src=js/app.js?v=1></script>
+	  <script src=/facetogif/js/vendor/gif.js></script>
+	  <script src=/facetogif/js/app.js?v=1></script>
 	  <script>
 	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

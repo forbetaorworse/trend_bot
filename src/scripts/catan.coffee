@@ -536,7 +536,7 @@ class City
 
 module.exports = (robot) ->
 	@catan = new Catan robot
-	stylespath = __dirname + process.env.EXPRESS_STATIC + "/styles/"
+	stylespath    = process.cwd() + (process.env.EXPRESS_STATIC || "/public") + "/styles/"
 	robot.sass.renderFile 
 		file: "#{stylespath}sass/catan.scss"
 		outFile: "#{stylespath}catan.css"

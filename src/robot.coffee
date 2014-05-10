@@ -267,7 +267,7 @@ class Robot
   setupExpress: ->
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
-    stat    = process.env.PWD + (process.env.EXPRESS_STATIC || "/public")
+    stat    = process.cwd() + (process.env.EXPRESS_STATIC || "/public")
     console.log "HERE HERE! " + stat
 
     express = require 'express'
