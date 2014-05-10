@@ -267,7 +267,7 @@ class Robot
   setupExpress: ->
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
-    stat    = Path.join(process.cwd() + (process.env.EXPRESS_STATIC || "/public"), maxAge: 86400000 )
+    stat    = process.cwd() + (process.env.EXPRESS_STATIC || "/public")
 
     express = require 'express'
     @sass = require "node-sass"
