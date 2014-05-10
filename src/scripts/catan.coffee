@@ -533,8 +533,18 @@ class City
 ########### Instantiator ###########
 ####################################
 
+
 module.exports = (robot) ->
 	@catan = new Catan robot
+	stylespath = __dirname + process.env.EXPRESS_STATIC + "/styles/"
+	robot.sass.renderFile 
+		file: "#{stylespath}sass/catan.scss"
+		outFile: "#{stylespath}catan.css"
+		outputStyle: "compressed"
+		success: () ->
+			console.log "CSS compressed and saved: catan.scss"
+		error: (error) ->
+			console.log(error)
 
 ######### END Instantiator #########
 
@@ -551,13 +561,14 @@ module.exports = (robot) ->
 ########## HTTP responders #########
 ####################################
 
-	robot.router.get '/catan', (request, response) ->
+	# This was just for making sure thingies work. THEY DO!
+	robot.router.get '/catan/test', (request, response) ->
 		catan.newGame default_game_config, ["shell"]
-		console.log "It worked"
-		console.log robot.brain.data.catan[0].bank.devDeck
-		console.log robot.brain.data.catan[0].board.landTiles
-		console.log robot.brain.data.catan[0].board.portTiles
 		response.end homeContents "TRENDSPACE - Settlers of Catan"
+
+
+	robot.router.get '/catan', (request, response) ->
+
 
 ######## End HTTP responders #######
 
@@ -593,6 +604,7 @@ homeContents = (title) ->
   <script src="/js/jquery/jquery-min.js"></script>
   <script src="/js/underscore/underscore-min.js"></script>
   <script src="/js/catan.js"></script>
+  <link rel="stylesheet" type="text/css" href="/styles/catan.css" />
   <title>#{title}</title>
   </head>
   <body>

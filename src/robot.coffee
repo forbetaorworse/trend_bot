@@ -267,7 +267,8 @@ class Robot
   setupExpress: ->
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
-    stat    = process.env.PWD + process.env.EXPRESS_STATIC
+    stat    = process.env.PWD + (process.env.EXPRESS_STATIC || "/public")
+    console.log "HERE HERE! " + stat
 
     express = require 'express'
     @sass = require "node-sass"
@@ -283,8 +284,8 @@ class Robot
     app.use express.bodyParser()
     app.use express.static stat if stat
     app.use @sass.middleware(
-      src: process.cwd() + process.env.EXPRESS_STATIC + "/styles/sass/"
-      dest: process.cwd() + process.env.EXPRESS_STATIC + "/styles/"
+      src: __dirname + "/styles/sass/"
+      dest: __dirname + "/styles/"
       debug: true
     )
 
