@@ -281,11 +281,12 @@ class Robot
     app.use express.basicAuth user, pass if user and pass
     app.use express.query()
     app.use express.bodyParser()
-    app.use @sass.middleware(
-      src: process.cwd() + "/src/"
-      dest: stat
-      debug: true
-    )
+    # app.use @sass.middleware(
+    #   src: process.cwd() + "/src/sass"
+    #   dest: stat + "/sass"
+    #   outputStyle: "compressed"
+    #   debug: true
+    # )
     app.use express.static stat if stat
 
     try
