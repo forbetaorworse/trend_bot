@@ -10,5 +10,3 @@
 
 module.exports = (@robot) ->
 
-	console.log "Here's the styles src: " + process.cwd() + "/src/styles"
-	console.log "Here's the styles dest: " + process.cwd() + process.env.EXPRESS_STATIC + "/styles"

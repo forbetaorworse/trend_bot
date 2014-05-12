@@ -10,14 +10,14 @@
 module.exports = (robot) ->
 	stylespath    = process.cwd() + (process.env.EXPRESS_STATIC || "/public") + "/styles/"
 
-	robot.sass.renderFile 
-		file: "#{stylespath}sass/facetogif.scss"
-		outFile: "#{stylespath}facetogif.css"
-		outputStyle: "compressed"
-		success: () ->
-			console.log "CSS compressed and saved: facetogif.scss"
-		error: (error) ->
-			console.log(error)
+	# robot.sass.renderFile 
+	# 	file: "#{stylespath}sass/facetogif.scss"
+	# 	outFile: "#{stylespath}facetogif.css"
+	# 	outputStyle: "compressed"
+	# 	success: () ->
+	# 		console.log "CSS compressed and saved: facetogif.scss"
+	# 	error: (error) ->
+	# 		console.log(error)
 
 	robot.respond /gif me$/i, (msg) ->
 		console.log process.env

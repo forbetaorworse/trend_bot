@@ -536,15 +536,16 @@ class City
 
 module.exports = (robot) ->
 	@catan = new Catan robot
-	stylespath    = process.cwd() + (process.env.EXPRESS_STATIC || "/public") + "/styles/"
-	robot.sass.renderFile 
-		file: "#{stylespath}sass/catan.scss"
-		outFile: "#{stylespath}catan.css"
-		outputStyle: "compressed"
-		success: () ->
-			console.log "CSS compressed and saved: catan.scss"
-		error: (error) ->
-			console.log(error)
+
+	# stylespath    = process.cwd() + (process.env.EXPRESS_STATIC || "/public") + "/styles/"
+	# robot.sass.renderFile 
+	# 	file: "#{stylespath}sass/catan.scss"
+	# 	outFile: "#{stylespath}catan.css"
+	# 	outputStyle: "compressed"
+	# 	success: () ->
+	# 		console.log "CSS compressed and saved: catan.scss"
+	# 	error: (error) ->
+	# 		console.log(error)
 
 ######### END Instantiator #########
 

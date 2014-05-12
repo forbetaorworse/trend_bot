@@ -267,7 +267,7 @@ class Robot
   setupExpress: ->
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
-    stat    = process.cwd() + (process.env.EXPRESS_STATIC || "/public")
+    stat    = Path.join(__dirname, "/../public")
 
     express = require 'express'
     @sass = require "node-sass"
@@ -278,16 +278,19 @@ class Robot
       res.setHeader "X-Powered-By", "hubot/#{@name}"
       next()
 
+    app.use express.static(stat, { maxAge: 86400000 })
+    # app.use('public/image', express.static(Path.join(__dirname, 'public/image')))
+    # app.use('public/styles', express.static(Path.join(__dirname, 'public/styles')))
+    # app.use('public/styles/sass', express.static(Path.join(__dirname, 'public/styles/sass')))
     app.use express.basicAuth user, pass if user and pass
     app.use express.query()
     app.use express.bodyParser()
-    # app.use @sass.middleware(
-    #   src: process.cwd() + "/src/sass"
-    #   dest: stat + "/sass"
-    #   outputStyle: "compressed"
-    #   debug: true
-    # )
-    app.use express.static stat if stat
+    app.use @sass.middleware(
+      src: Path.join(__dirname, "/../sass")
+      dest: stat
+      outputStyle: "compressed"
+      debug: true
+    )
 
     try
       @server = app.listen(process.env.PORT || 8080, process.env.BIND_ADDRESS || '0.0.0.0')
