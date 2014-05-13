@@ -276,7 +276,7 @@
             e.target.href = 'http://imgur.com/' + json.data.id;
             e.target.classList.remove('processing');
             e.target.classList.add('uploaded');
-            tsResponder.open("GET", "/facetogif/posttotrendspace/" + json.data.id, true);
+            tsResponder.open("POST", "/facetogif/posttotrendspace/" + json.data.id, true);
             tsResponder.send (null);
           },
           oncanupload: function () {
