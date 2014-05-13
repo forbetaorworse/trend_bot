@@ -10,7 +10,7 @@
   var tsResponder = new XMLHttpRequest();
   tsResponder.onload = function(e) {
     console.log("We did it!");
-    console.log(e);
+    console.log(tsResponder.response);
   };
   tsResponder.onerror = function (e) {
     console.error(tsResponder.statusText);

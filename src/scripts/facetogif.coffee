@@ -27,7 +27,7 @@ module.exports = (robot) ->
 	robot.router.get '/facetogif', (request, response) ->
 		response.end homeContents "TRENDSPACE - Face to GIF"
 
-	robot.router.post 'facetogif/posttotrendspace/:dataId', (request, response) ->
+	robot.router.post '/facetogif/posttotrendspace/:dataId', (request, response) ->
 		dataId = request.param "dataId"
 		robot.messageRoom 595758, "http://i.imgur.com/#{dataId}.gif"
 		response.end "success"
