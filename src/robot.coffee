@@ -267,7 +267,7 @@ class Robot
   setupExpress: ->
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
-    stat    = Path.normalize(Path.join(__dirname, "/../public"))
+    stat    = Path.normalize(Path.join(__dirname, "../public"))
 
     express = require 'express'
     @sass = require "node-sass"
