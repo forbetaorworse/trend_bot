@@ -288,8 +288,8 @@ class Robot
       res.setHeader "X-Powered-By", "hubot/#{@name}"
       next()
 
-    for dir in static_dirs
-      app.use express.static(Path.normalize(Path.join(__dirname, "../#{dir}")), { maxAge: 86400000 })
+    for i in [static_dirs.length-1..0] by -1
+      app.use express.static(Path.normalize(Path.join(__dirname, "../#{static_dirs[i]}")), { maxAge: 86400000 })
 
     # app.use express.static(Path.normalize(Path.join(__dirname, '../public')), { maxAge: 86400000 })
     # app.use express.static(stat, { maxAge: 86400000 })
