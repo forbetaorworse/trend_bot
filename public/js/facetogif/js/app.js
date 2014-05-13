@@ -7,9 +7,16 @@
     full: [640, 480]
   },
   currentVideoPreset = "640480";
+  var tsResponder = new XMLHttpRequest();
+  tsResponder.onload = function(e) {
+    console.log("We did it!");
+    console.log(e);
+  };
+  tsResponder.onerror = function (e) {
+    console.error(tsResponder.statusText);
+  };
 
   function thisBrowserIsBad() {
-    track('streaming', 'not supported');
     alert(facetogif.str.nope);
   }
 
@@ -43,7 +50,6 @@
         facetogif.gifSettings.w = preset[0];
         facetogif.gifSettings.h = preset[1];
         facetogif.gifSettings.preset = presetName;
-        track('recording', 'changed-size', presetName);
       } else {
         console.log(presetName, 'not found');
       }
@@ -234,13 +240,6 @@
     fn();
   }
 
-  function track() {
-    if (typeof ga !== "undefined") {
-      ga.apply(ga, ['send', 'event'].concat([].slice.call(arguments)));
-    }
-  }
-
-
   document.addEventListener('DOMContentLoaded', function (e) {
     facetogif.video = document.querySelector('video');
     facetogif.controls = document.getElementById('controls-template');
@@ -258,11 +257,9 @@
         return e;
       } (e.target));
       if (e.target.classList.contains('download')) {
-        track('generated-gif', 'download');
         e.target.href = container.querySelector('.generated-img').src;
       } else if (e.target.classList.contains('remove')) {
         e.preventDefault();
-        track('generated-gif', 'remove');
         if (confirm(facetogif.str.rusure)) {
           var img = container.querySelector('.generated-img');
           img.src = null;
@@ -272,7 +269,6 @@
         }
       } else if (e.target.classList.contains('upload')) {
         e.preventDefault();
-        track('generated-gif', 'imgur');
         facetogif.upload({
           img: container.querySelector('.generated-img'),
           onuploaded: function (json) {
@@ -280,9 +276,8 @@
             e.target.href = 'http://imgur.com/' + json.data.id;
             e.target.classList.remove('processing');
             e.target.classList.add('uploaded');
-            track('generated-gif', 'is on imgur.com');
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/facetogif/posttotrendspace/" + json.data.id);
+            tsResponder.open("GET", "/facetogif/posttotrendspace/" + json.data.id, true);
+            tsResponder.send (null);
           },
           oncanupload: function () {
             e.target.classList.remove('upload');
@@ -292,10 +287,8 @@
           oncannotupload: function () {
             e.target.parentNode.removeChild(e.target);
             alert('The gif is still too big for imgur. :-(');
-            track('generated-gif', 'toobig');
           },
           onoptimize: function () {
-            track('generated-gif', 'optimising');
             e.target.classList.add('processing');
             e.target.innerHTML = facetogif.str.OPTIMISING;
           }
@@ -306,22 +299,18 @@
     document.getElementById('put-your-face-here').addEventListener('click', function (e) {
       var button = e.target;
       if (button.classList.contains('clicked') && facetogif.stream) {
-        track('streaming', 'stop');
         facetogif.stream.stop();
         facetogif.stream = null;
         facetogif.video.removeAttribute('src');
         button.innerHTML = facetogif.str.ASK_FOR_PERMISSION;
         button.classList.remove('streaming');
       } else {
-        track('streaming', 'request');
         getStream(function (stream) {
-          track('streaming', 'start');
           button.innerHTML = facetogif.str.STOP_STREAMING;
           button.classList.add('streaming');
           facetogif.video.src = window.URL.createObjectURL(stream);
           facetogif.stream = stream;
         }, function (fail) {
-          track('streaming', 'failed');
           console.log(fail);
         });
       }
@@ -351,11 +340,8 @@
           mainbutton.classList.remove('processing');
           mainbutton.parentNode.classList.remove('busy');
           mainbutton.innerHTML = facetogif.str.START_RECORDING;
-          track('generated-gif', 'created');
         });
-        track('recording', 'finished');
       } else if (recorder.state === recorder.states.IDLE || recorder.state === recorder.states.FINISHED) {
-        track('recording', 'start');
         recorder.gif = new GIF({
           workers: 2,
           width: facetogif.gifSettings.w,
@@ -376,13 +362,11 @@
     }, false);
     pause.addEventListener('click', function (e) {
       if (recorder.state === recorder.states.RECORDING) {
-        track('recording', 'pause');
         recorder.pause();
         pause.innerHTML = facetogif.str.RESUME;
         facetogif.recIndicator.classList.remove('on');
       } else if (recorder.state === recorder.states.PAUSED) {
         recorder.setBusy();
-        track('recording', 'resume');
         countdown(pause, function () {
           facetogif.recIndicator.classList.add('on');
           pause.innerHTML = facetogif.str.PAUSE;
