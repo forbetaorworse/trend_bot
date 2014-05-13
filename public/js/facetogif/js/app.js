@@ -281,6 +281,7 @@
             e.target.classList.remove('processing');
             e.target.classList.add('uploaded');
             track('generated-gif', 'is on imgur.com');
+            xhr = new XMLHttpRequest();
             xhr.open("GET", "/facetogif/posttotrendspace/" + json.data.id);
           },
           oncanupload: function () {
