@@ -267,7 +267,7 @@ class Robot
   setupExpress: ->
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
-    stat    = Path.normalize(Path.join(__dirname, "../public"))
+    stat    = Path.normalize(Path.join(__dirname, '../public'))
 
     express = require 'express'
     @sass = require "node-sass"
@@ -278,7 +278,9 @@ class Robot
       res.setHeader "X-Powered-By", "hubot/#{@name}"
       next()
 
-    app.use express.static(stat, { maxAge: 86400000 })
+
+    app.use express.static(Path.normalize(Path.join(__dirname, '../public')), { maxAge: 86400000 })
+    # app.use express.static(stat, { maxAge: 86400000 })
     # app.use('public/image', express.static(Path.join(__dirname, 'public/image')))
     # app.use('public/styles', express.static(Path.join(__dirname, 'public/styles')))
     # app.use('public/styles/sass', express.static(Path.join(__dirname, 'public/styles/sass')))
