@@ -103,8 +103,8 @@ homeContents = (title) ->
 	      <a class="ui-button upload img control to-imgur" href=http://imgur.com target=_blank>imgur</a>
 	      <a class="ui-button remove img control to-danger">x</a>
 	    </div>
-	  <script src="/js/facetogif/gif.js"></script>
-	  <script src="/js/facetogif/app.js"></script>
+	  <script src="/js/facetogif/js/vendor/gif.js"></script>
+	  <script src="/js/facetogif/js/app.js"></script>
 	  <script>
 	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
