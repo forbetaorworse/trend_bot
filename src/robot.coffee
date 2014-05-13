@@ -281,7 +281,8 @@ class Robot
 
 
     # app.use express.static(stat, { maxAge: 86400000 })
-    app.use express.static stat
+    app.use express.static(stat, { maxAge: 80 })
+    # app.use express.static stat
 
 
     app.use express.basicAuth user, pass if user and pass
