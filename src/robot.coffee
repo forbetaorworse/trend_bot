@@ -279,11 +279,11 @@ class Robot
       next()
 
 
-    # app.use express.static(Path.normalize(Path.join(__dirname, '../public')), { maxAge: 86400000 })
-    app.use express.static(stat, { maxAge: 86400000 })
-    # app.use('public/image', express.static(Path.join(__dirname, 'public/image')))
-    # app.use('public/styles', express.static(Path.join(__dirname, 'public/styles')))
-    # app.use('public/styles/sass', express.static(Path.join(__dirname, 'public/styles/sass')))
+
+    # app.use express.static(stat, { maxAge: 86400000 })
+    app.use express.static stat
+
+
     app.use express.basicAuth user, pass if user and pass
     app.use express.query()
     app.use express.bodyParser()
