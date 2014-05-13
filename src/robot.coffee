@@ -268,6 +268,16 @@ class Robot
     user    = process.env.EXPRESS_USER
     pass    = process.env.EXPRESS_PASSWORD
     stat    = Path.normalize(Path.join(__dirname, '../public'))
+    static_dirs = [
+      'public',
+      'public/image',
+      'public/js',
+      'public/js/backbone',
+      'public/js/facetogif',
+      'public/js/facetogif/js',
+      'public/js/facetogif/js/vendor',
+      'public/js/underscore'
+    ]
 
     express = require 'express'
     @sass = require "node-sass"
@@ -278,8 +288,10 @@ class Robot
       res.setHeader "X-Powered-By", "hubot/#{@name}"
       next()
 
+    for dir in static_dirs
+      app.use express.static(Path.normalize(Path.join(__dirname, "../#{dir}")), { maxAge: 86400000 })
 
-    app.use express.static(Path.normalize(Path.join(__dirname, '../public')), { maxAge: 86400000 })
+    # app.use express.static(Path.normalize(Path.join(__dirname, '../public')), { maxAge: 86400000 })
     # app.use express.static(stat, { maxAge: 86400000 })
     # app.use('public/image', express.static(Path.join(__dirname, 'public/image')))
     # app.use('public/styles', express.static(Path.join(__dirname, 'public/styles')))
