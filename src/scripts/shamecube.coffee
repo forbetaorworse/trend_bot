@@ -8,10 +8,10 @@
 #   None
 #
 # Commands:
-#   shamecube - display a shamecube
+#   hubot shamecube - display a shamecube
 #
 # Author:
-#   SonicBoom
+#   GAY
 
 module.exports = (robot) ->
   robot.hear /shame ?cube/i, (msg)->
