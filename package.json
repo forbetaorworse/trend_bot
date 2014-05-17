@@ -45,7 +45,9 @@
     "instagram-node-lib" : ">=0.1.1",
     "mongodb": ">= 1.2.0",
     "node-sass": ">=0.8.6",
-    "iconv-lite": ">=0.3.0"
+    "iconv-lite": ">=0.3.0",
+    "consolidate": "0.10.0",
+    "hbs": "2.6.0"
   },
 
   "engines": {

@@ -7,7 +7,7 @@ HttpClient     = require 'scoped-http-client'
 User = require './user'
 Brain = require './brain'
 Response = require './response'
-View = require './view'
+
 {Listener,TextListener} = require './listener'
 {EnterMessage,LeaveMessage,TopicMessage,CatchAllMessage} = require './message'
 
@@ -49,7 +49,6 @@ class Robot
     @commands  = []
     @listeners = []
     @logger    = new Log process.env.HUBOT_LOG_LEVEL or 'info'
-    @view      = new View
 
     @parseVersion()
     if httpd
@@ -273,6 +272,7 @@ class Robot
 
     express = require 'express'
     @sass = require "node-sass"
+    hbs = require 'hbs'
 
     app = express()
 
@@ -285,6 +285,8 @@ class Robot
     app.use express.static(stat, { maxAge: 86400000 })
     # app.use express.static(stat, { maxAge: 80 })
     # app.use express.static stat
+    app.set 'views', Path.join(__dirname + '/../views')
+    app.set 'view engine', 'hbs'
 
 
     app.use express.basicAuth user, pass if user and pass

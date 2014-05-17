@@ -14,8 +14,8 @@ module.exports = (@robot) ->
 	robot.router.get '/ultimatetest', (request, response) ->
 		data = 
 			testVar: "What a var!"
-		view = @robot.view.getView "helloWorld", data
-		response.end view
+			anotherVar: "What another var!"
+		response.render 'helloWorld', data
 
 
 
