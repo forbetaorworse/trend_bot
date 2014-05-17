@@ -7,6 +7,7 @@ HttpClient     = require 'scoped-http-client'
 User = require './user'
 Brain = require './brain'
 Response = require './response'
+View = require './view'
 {Listener,TextListener} = require './listener'
 {EnterMessage,LeaveMessage,TopicMessage,CatchAllMessage} = require './message'
 
@@ -48,6 +49,7 @@ class Robot
     @commands  = []
     @listeners = []
     @logger    = new Log process.env.HUBOT_LOG_LEVEL or 'info'
+    @view      = new View
 
     @parseVersion()
     if httpd

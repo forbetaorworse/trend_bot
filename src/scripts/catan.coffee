@@ -11,10 +11,26 @@
 # Author:
 #	Eric M.F. Westbrook
 #
+# Classs List:
+#	Catan - App wrapper object
+#	Game - A game of Catan
+#	Turn - A turn in a game of catan. Includes each player's activity
+#	Player - A player in a game of catan (not the same as user)
+#	Board - The board in a game of catan
+#	Tile - A tile on the board in a game of catan
+#	Resource - A resource card
+#	DevCard - A development card
+#	Bank - Contains the decks of Resources & DevCards to draw from
+#	Thief - The thief in a game of catan
+#	Dice - The dice in a game of catan
+#	Road - Road pieces for players to purchase & place
+#	Settlement - Settlement pieces for players to purchase & place
+#	City - City pieces for players to purchase & place
+
 
 
 ####################################
-############## Config ##############
+######### Setup &  Config ##########
 ####################################
 
 # Default game config
@@ -22,7 +38,7 @@ default_game_config =
 	landTilePlacement: 'default'
 	portTilePlacement: 'default'
 
-############ END CONFIG ############
+####### END SETUP & CONFIG #########
 
 
 ####################################
@@ -110,7 +126,7 @@ class Player
 	# @availableRoads - Road pieces player has available to them
 	# @victoryPoints - Number of victory points player has
 	constructor: (user) ->
-		@id = user
+		@id = user.id
 		@availableSettlements = []
 		for [1..5]
 			@availableSettlements.push new Settlement
@@ -121,6 +137,10 @@ class Player
 		for [1..15]
 			@availableRoads.push new Road
 		@victoryPoints = 0
+		@devHand = []
+		@devPlayed = []
+		
+
 # Board object
 class Board
 	# @landTiles - A collection of all the land tiles on the board
@@ -419,14 +439,14 @@ class Tile
 				addCommonLand "F", 17, "B"
 				addCommonLand "F", 12, "D"
 
-	setCommonLand: (corner, neighborTile, neighborCorner) ->
+	addCommonLand: (corner, neighborTile, neighborCorner) ->
 		# Create associations between shared corners
 		point =
 			corner: corner
 			neighborTile: neighborTile
 			neighborCorner: neighborCorner
 		@commonLandPoints.push point
-	setCommonPort: (corner, neighborTile, neighborCorner) ->
+	addCommonPort: (corner, neighborTile, neighborCorner) ->
 		# Create associations between shared corners with ports
 		point =
 			corner: corner
@@ -526,6 +546,11 @@ class Settlement
 
 # City object
 class City
+
+# Turn object
+class Turn
+
+
 
 ######## End Object Classes ########
 

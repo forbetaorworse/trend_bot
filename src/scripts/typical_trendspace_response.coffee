@@ -44,4 +44,4 @@ module.exports = (robot) ->
 		reaction = msg.match[2]
 		reactions.push reaction
 		robot.brain.data.reactions = reactions
-		msg.send "Added '#{reaction}' to Cronobase"
+		msg.send "Added ' #{reaction} ' to Cronobase"
