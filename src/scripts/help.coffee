@@ -73,6 +73,10 @@ module.exports = (robot) ->
 
     msg.send emit
 
+  robot.respond /(e)?mail$/i, (msg) ->
+    emit = "Trendspace Email: http://mail.ihatetrendspace.com"
+    msg.send emit
+
   robot.router.get "/#{robot.name}/help", (req, res) ->
     cmds = robot.helpCommands().map (cmd) ->
       cmd.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')

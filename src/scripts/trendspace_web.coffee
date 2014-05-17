@@ -23,5 +23,4 @@ module.exports = (@robot) ->
 		data = 
 			testVar: "What a new var!"
 			anotherVar: "Does this work?"
-		view = @robot.view.getView "helloWorld", data
-		response.end view
+		response.render 'helloWorld', data
