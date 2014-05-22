@@ -54,6 +54,12 @@
     "underscore": "~1.6.0"
   },
 
+  "devDependencies": {
+    "grunt": "0.4.1",
+    "grunt-contrib-watch": "0.4.3",
+    "grunt-sass": "0.6.1"
+  },
+
   "engines": {
     "node": "0.10.28",
     "npm":  "1.2.25"

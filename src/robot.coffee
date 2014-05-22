@@ -271,24 +271,18 @@ class Robot
     stat    = Path.normalize(Path.join(__dirname, '../public'))
 
     express = require 'express'
-    @sass = require "node-sass"
+    sass = require "node-sass"
     hbs = require 'hbs'
     passport = require 'passport'
 
     app = express()
 
-    app.use (req, res, next) =>
-      res.setHeader "X-Powered-By", "hubot/#{@name}"
-      next()
-
-
-
-    # app.use express.static(stat, { maxAge: 86400000 })
-    app.use express.static(stat)
-    # app.use express.static stat
-    app.set 'views', Path.join(__dirname + '/../assets/views')
-    app.set 'view engine', 'hbs'
-
+    app.use sass.middleware(
+      src: "#{__dirname}/../assets/sass"
+      dest: stat
+      outputStyle: "compressed"
+      debug: true
+    )
 
     app.use express.basicAuth user, pass if user and pass
     app.use express.query()
@@ -297,12 +291,12 @@ class Robot
     app.use express.session( secret: 'Holy Canolli' )
     app.use passport.initialize()
     app.use passport.session()
-    app.use @sass.middleware(
-      src: Path.join(__dirname, "/../assets/sass")
-      dest: stat
-      outputStyle: "compressed"
-      debug: true
-    )
+
+    app.set 'views', Path.join(__dirname + '/../assets/views')
+    app.set 'view engine', 'hbs'
+
+    # app.use express.static(stat, { maxAge: 86400000 })
+    app.use express.static stat
 
     try
       @server = app.listen(process.env.PORT || 8080, process.env.BIND_ADDRESS || '0.0.0.0')
