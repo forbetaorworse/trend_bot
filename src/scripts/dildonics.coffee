@@ -12,7 +12,6 @@ module.exports = (robot) ->
 		if robot.brain.data.fagocity?
 			fagocity = robot.brain.data.fagocity
 		else fagocity = 1
-		console.log("Current level of fagocity: #{fagocity}")
 		if robot.brain.data.user_fagocities?
 			user_fagocities = robot.brain.data.user_fagocities
 		robot.brain.data.user_fagocities = user_fagocities

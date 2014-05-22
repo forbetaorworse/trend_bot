@@ -273,6 +273,7 @@ class Robot
     express = require 'express'
     @sass = require "node-sass"
     hbs = require 'hbs'
+    passport = require 'passport'
 
     app = express()
 
@@ -282,18 +283,22 @@ class Robot
 
 
 
-    app.use express.static(stat, { maxAge: 86400000 })
-    # app.use express.static(stat, { maxAge: 80 })
+    # app.use express.static(stat, { maxAge: 86400000 })
+    app.use express.static(stat)
     # app.use express.static stat
-    app.set 'views', Path.join(__dirname + '/../views')
+    app.set 'views', Path.join(__dirname + '/../assets/views')
     app.set 'view engine', 'hbs'
 
 
     app.use express.basicAuth user, pass if user and pass
     app.use express.query()
     app.use express.bodyParser()
+    app.use express.cookieParser()
+    app.use express.session( secret: 'Holy Canolli' )
+    app.use passport.initialize()
+    app.use passport.session()
     app.use @sass.middleware(
-      src: Path.join(__dirname, "/../sass")
+      src: Path.join(__dirname, "/../assets/sass")
       dest: stat
       outputStyle: "compressed"
       debug: true
