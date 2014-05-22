@@ -50,4 +50,14 @@ templates = [
 utils.loadTemplate(templates, function() {
 	app = new AppRouter();
 	Backbone.history.start({ pushState: true });
+
+	// Prevent page refreshes on pushState pages
+	$(document).on('click', 'a:not([data-bypass])', function (evt) {
+	    var href = $(this).attr('href');
+	    var protocol = this.protocol + '//';
+	    if (href.slice(protocol.length) !== protocol) {
+	    	evt.preventDefault();
+	    	app.navigate(href, true);
+    	}
+    });
 });
