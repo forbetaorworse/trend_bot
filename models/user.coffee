@@ -23,13 +23,12 @@ UserSchema = new Schema(
 
 
 # Virtuals
-UserSchema
-	.virtual 'password'
-	.set setPassword = (password) ->
-		@_password = password
-		@salt = @makeSalt
-		@hashed_password = @encryptPassword(password)
-	.get returnFucntion = () ->
+UserSchema.virtual 'password'
+UserSchema.set (password) ->
+	@_password = password
+	@salt = @makeSalt
+	@hashed_password = @encryptPassword(password)
+UserSchema.get () ->
 		@_password
 
 
