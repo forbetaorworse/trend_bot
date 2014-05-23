@@ -1,1 +1,1 @@
-web: bin/hubot -a campfire -n '/' --alias 'TrendBot'
+web: bin/trendspace -a campfire -n '/' --alias 'TrendBot'

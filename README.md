@@ -28,7 +28,7 @@ npm install
 4. Start the server
 
 ```bash
-bin/hubot
+bin/trendspace
 ```
 
 ## Coding guidelines
