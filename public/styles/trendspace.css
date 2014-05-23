@@ -1,3 +1,36 @@
+/**
+ * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+ * http://cssreset.com
+ */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -4352,4 +4385,28 @@ button.close {
     display: none !important; } }
 
 #header {
-  background: red; }
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #964a99;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #964a99 0%, #7a3a79 47%, #602a5d 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #964a99), color-stop(47%, #7a3a79), color-stop(100%, #602a5d));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #964a99 0%, #7a3a79 47%, #602a5d 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #964a99 0%, #7a3a79 47%, #602a5d 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #964a99 0%, #7a3a79 47%, #602a5d 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #964a99 0%, #7a3a79 47%, #602a5d 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#964a99', endColorstr='#602a5d',GradientType=0 );
+  /* IE6-9 */ }
+  #header h1 {
+    margin: 0; }
+
+#content {
+  margin-top: 4em; }

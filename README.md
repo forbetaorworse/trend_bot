@@ -1,4 +1,4 @@
-# TRENDBOT / TRENDSPACE
+# TRENDSPACE
 
 ## What's this bullshit?
 
@@ -11,3 +11,10 @@ So don't fuck it up.
 ## I want to change / add something to trendspace.
 
 Cool. Here's what you do. You can pull this code directly to your desktop. Follow the instructions below to get a local environment running. When you've made changes and have verified functionality, submit a pull request. Code changes will be reviewed before being pushed to production to write new tests & ensure all existing tests pass and nothing breaks.
+
+## Running TRENDSPACE locally
+
+1. Check out trendbot
+```bash
+git clone git@github.com:forbetaorworse/trend_bot.git
+```

@@ -6,5 +6,15 @@ window.LoginView = Backbone.View.extend({
 	render: function() {
 		$(this.el).html(this.template());
 		return this;
+	},
+
+	events: {
+		"click .submit" 		: "beforeSave"
+
+	},
+
+	beforeSave: function() {
+		alert('what the fuck no way it works');
 	}
+
 });
