@@ -14,7 +14,24 @@ Cool. Here's what you do. You can pull this code directly to your desktop. Follo
 
 ## Running TRENDSPACE locally
 
-1. Check out trendbot
+1. Install node.js
+2. Check out trendbot and install the modules
+
 ```bash
 git clone git@github.com:forbetaorworse/trend_bot.git
+cd trend_bot/
+npm install
 ```
+
+3. Install and configure mongodb and edit config/config.coffee's dev environment to match your local server settings.
+
+4. Start the server
+
+```bash
+bin/hubot
+```
+
+## Coding guidelines
+
+1. All code must pass current tests
+2. All new code must have new tests
