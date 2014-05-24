@@ -31,6 +31,27 @@ npm install
 bin/trendspace
 ```
 
+## Adding web content
+
+The easiest way to add new pages to TRENDSPACE is to add them to the public folder. Be careful in here. There are still app dependencies that you could impact. Also, the public folder is not a place to keep a slew of files for sharing purposes (music, movies, GIFs, etc).
+
+There is no PHP here. If you want dynamic content, you must utilize express routes.
+
+## CSS with SASS
+
+TRENDSPACE uses SASS for CSS. The .scss files can be found in assets/sass/styles. When a user visits a page and a CSS file is requested, it looks for the coressponding scss file and generates a compiled and minified version that is then delivered to the user.
+
+In order to see CSS changes on SASS files without restarting your local environment, you need to have the grunt watch task running.
+
+```bash
+npm install -g grunt
+grunt watch
+```
+
+## HTML with Handlebars
+
+## Trendbot scripts
+
 ## Coding guidelines
 
 1. All code must pass current tests

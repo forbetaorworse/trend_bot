@@ -1,6 +1,7 @@
 {
-  "name": "Trendbot",
-  "version": "1.0.0",
+  "name": "Trendspace",
+  "version": "0.0.1",
+  "private": true,
 
   "author": "Trendspace",
   "repository": {
@@ -15,7 +16,7 @@
     "bot"
   ],
 
-  "description": "TRENDSPACE's web platform. We were in awe with hubot's power on responding to http requests. We plugged mongodb in and now we have a full-on (erection &) web application. Hubot as a platform.",
+  "description": "TRENDSPACE's web platform.",
 
   "licenses": [{
     "type": "MIT",

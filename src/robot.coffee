@@ -281,7 +281,6 @@ class Robot
       src: "#{__dirname}/../assets/sass"
       dest: stat
       outputStyle: "compressed"
-      debug: true
     )
 
     app.use express.basicAuth user, pass if user and pass

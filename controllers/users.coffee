@@ -11,7 +11,8 @@ exports.authCallBack = (req, res, next) ->
 exports.login = (req, res) ->
 	data =
 		title: 'Login'
-		message: if req.flash then req.flash 'error' 
+		message: if req.flash then req.flash 'error'
+		users: User.all
 	res.render 'index', data
 
 # Show sign up form

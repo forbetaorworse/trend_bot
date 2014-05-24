@@ -4,11 +4,15 @@ window.User = Backbone.Model.extend({
 	idAttribute: "_id",
 
 	initialize: function() {
-		this.validators = {};
-		this.validators.name = function (value) {
-			return value.length > 0 ? {isValid: true} : {isValid: false, message: "Email cannot be blank"};
-		};
+		this.bind("change", this.attributesChanged);
 	},
+
+	attributesChanged: function(){
+      var valid = false;
+      if (this.get('username') && this.get('password'))
+        valid = true;
+      this.trigger("validated", valid);
+    },
 
 	validate: function(attrs, options) {
 		// TODO Write validations
@@ -16,8 +20,23 @@ window.User = Backbone.Model.extend({
 
 	defaults: {
 		_id: null,
-		name: "user@email.com",
+		name: "",
+		email: "",
 		password: ""
 	}
+});
 
+
+// Login Credentials model
+window.Credentials = Backbone.Model.extend({
+	initialize: function() {
+		this.bind("change", this.attributesChanged);
+	},
+
+	attributesChanged: function() {
+		var valid = false;
+		if (this.get('username') && this.get('password'))
+			valid = true;
+		this.trigger("validated", valid);
+	}
 });

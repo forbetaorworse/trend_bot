@@ -1,0 +1,33 @@
+{
+  "name": "Trendspace",
+  "version": "0.0.1",
+  "private": true,
+
+  "dependencies": {
+    "backbone.marionette": "~1.8.6",
+    "jquery": "~1.11.1",
+    "underscore": "~1.6.0",
+    "backbone": "~1.1.2"
+  },
+
+  "devDependencies": {
+    "jasmine": "2.0.0"
+  },
+
+  "exportsOverride": {
+    "backbone": {
+      "js": "backbone.js"
+    },
+    "jquery": {
+      "js": "jquery.js"
+    },
+    "underscore": {
+      "js": "underscore.js"
+    },
+    "backbone.marionette": {
+      "js": "lib/backbone.marionette.js"
+    },
+    "jasmine": {}
+  }
+
+}
