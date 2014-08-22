@@ -40,7 +40,7 @@ module.exports = (robot) ->
 module.exports = (robot) ->
 	robot.respond /ttr$/i, (msg) ->
 		#console.log reaction[Math.floor(Math.random() * reaction.length)]
-		msg.send reaction[Math.floor(Math.random() * reaction.length)]
+		msg.send "How about instead of /ttr, you think of something original to say you fucking dullard?"
 
 
 		#msg.send "Warning! Current level of fagocity in TRENDSPACE is now #{fagocity}."
