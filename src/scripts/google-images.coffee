@@ -17,53 +17,28 @@ module.exports = (robot) ->
       msg.send url
 
   robot.respond /(?:mo?u)?sta(?:s|c)he?(?: me)? (.*)/i, (msg) ->
-    type = Math.floor(Math.random() * 3)
+    type = Math.floor(Math.random() * 6)
     mustachify = "http://mustachify.me/#{type}?src="
     imagery = msg.match[1]
 
-    imageMe msg, imagery, (url) ->
-      msg.send "#{mustachify}#{url}"
+    if imagery.match /^https?:\/\//i
+      msg.send "#{mustachify}#{imagery}"
+    else
+      imageMe msg, imagery, false, true, (url) ->
+        msg.send "#{mustachify}#{url}"
 
-imageMe = (msg, query, animated, cb) ->
-  # if query is !, find the previous message and grab its contents and rerun the query
-  if query is "!"
-    if msg.robot.adapter.bot.get?
-      msg.robot.adapter.bot.get "/room/#{msg.message.user.room}/recent.json", (foo, recent) ->
-        if recent.messages?
-          i = recent.messages.length
-          while i -= 1
-            if recent.messages[i].id is msg.message.user.msg_id
-              while recent.messages[i-1].type isnt "TextMessage"
-                i--
-              imageMe msg, recent.messages[i-1].body, animated, cb
-              return
-        else msg.send "I can't find a previous message."
-    else msg.send "I can't find a previous message."
-    return    
-
+imageMe = (msg, query, animated, faces, cb) ->
   cb = animated if typeof animated == 'function'
-  # if a URL is sent into imageMe, just send it back and stop
-  if query.match /^https?:\/\//i
-    cb query
-    return
+  cb = faces if typeof faces == 'function'
   q = v: '1.0', rsz: '8', q: query, safe: 'active'
-  if msg.message.user.room?
-    if msg.message.user.room is 291291
-      q.safe = 'off'
-  q.as_filetype = 'gif' if typeof animated is 'boolean' and animated is true
+  q.imgtype = 'animated' if typeof animated is 'boolean' and animated is true
+  q.imgtype = 'face' if typeof faces is 'boolean' and faces is true
   msg.http('http://ajax.googleapis.com/ajax/services/search/images')
     .query(q)
     .get() (err, res, body) ->
       images = JSON.parse(body)
-      if images.responseData? and images.responseData.results?
-        images = images.responseData.results
-        if images.length > 0
-          image  = msg.random images
-          cb "#{image.unescapedUrl}#.png"
-        else
-          msg.send "I can't find any images like that."
-      else
-        msg.send "Does not compute."
-        console.log "Image me fail."
-        console.log images
+      images = images.responseData?.results
+      if images?.length > 0
+        image  = msg.random images
+        cb "#{image.unescapedUrl}#.png"
 

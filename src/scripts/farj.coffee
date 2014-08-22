@@ -4,7 +4,7 @@
 # Commands:
 #   hubot gron - Reply with patented GRON command
 #   hubot cront - return pic of mcgibbits
-# hubot yindy = does some shit
+#   hubot yindy = does some shit
 
 module.exports = (robot) ->
   robot.respond /GRON$/i, (msg) ->

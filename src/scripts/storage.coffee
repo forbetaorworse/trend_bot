@@ -23,3 +23,16 @@ module.exports = (robot) ->
 
     msg.send response
 
+  robot.respond /(show )?fag(got)?s$/i, (msg) ->
+    response = "Look at these little faggots: \n"
+
+    for own key, user of robot.brain.data.users
+      response += "#{user.id} #{user.name}"
+      response += " <#{user.email_address}>" if user.email_address
+      response += "\n"
+
+    msg.send response
+
+  robot.respond /avatar fag(got)?s$/i, (msg) ->
+    for own key, user of robot.brain.data.users
+      msg.send user.avatar_url

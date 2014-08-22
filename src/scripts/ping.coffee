@@ -3,7 +3,7 @@
 #
 # Commands:
 #   hubot ping - Reply with pong
-#   hubot scrimb - return some stupid shit
+#   hubot ping trendm'n - Ping all trendm'n
 #   hubot echo <text> - Reply back with <text>
 #   hubot time - Reply with current time
 #   hubot die - End hubot process
@@ -12,12 +12,18 @@ module.exports = (robot) ->
   robot.respond /PING$/i, (msg) ->
     msg.send "PONGSPACE, you guys!!! Ha Ha drugs meaning (2014 I-H8-TRENDSPACE Edition)"
 
+  robot.respond /(ping|assembl(e)?|call)(ing)?( all)? ((trend|gay)m'n|fag(g)?[i|e|o](t(t)?s)?)$/i, (msg) ->
+    reply = "Hey, listen up all you jerks. We need all trendm'n assembled\n"
+    for own key, user of robot.brain.data.users
+      reply += "ping #{user.name}\n"
+
+    reply += "#{msg.message.user.name} called this meeting. All present say pong."
+
+    msg.send reply
+
   robot.respond /SCRIMB$/i, (msg) ->
     msg.send "Hitler"
 
-#  robot.respond /yindy/i, (msg) ->
-#    yonny = 3
-#    msg.send "Great work, dude! The yindy command has been run ${yonny} times."
   
   robot.respond /bro/i, (msg) ->
     msg.send "Bro"
@@ -32,4 +38,3 @@ module.exports = (robot) ->
   robot.respond /DIE$/i, (msg) ->
     msg.send "Goodbye, cruel world."
     process.exit 0
-
